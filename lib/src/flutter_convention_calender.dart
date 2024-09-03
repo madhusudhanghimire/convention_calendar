@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class ConventionCalendar extends StatefulWidget {
-  final Function(DateTime) onDaySelected;
+  final Function(DateTime, DateTime) onDaySelected;
   final DateTime firstDay;
   final DateTime lastDay;
   final DateTime focusedDay;
@@ -49,7 +49,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                 firstDay: widget.firstDay,
                 lastDay: widget.lastDay,
                 focusedDay: widget.focusedDay,
-                onDaySelected: (selectedDay, focusedDay) {},
+                onDaySelected: widget.onDaySelected,
                 calendarStyle: widget.calendarStyle ??
                     CalendarStyle(
                       defaultTextStyle: const TextStyle(
