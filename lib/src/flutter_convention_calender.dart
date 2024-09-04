@@ -20,7 +20,7 @@ class ConventionCalendar extends StatefulWidget {
     this.headerStyle,
     this.calendarStyle,
     this.calendarBuilders,
-    required this.onPageChanged,
+    this.onPageChanged,
   });
 
   @override
