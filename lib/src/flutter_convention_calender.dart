@@ -9,7 +9,8 @@ class ConventionCalendar extends StatefulWidget {
   final DateTime focusedDay;
   final CalendarStyle? calendarStyle;
   final HeaderStyle? headerStyle;
-
+  final CalendarBuilders? calendarBuilders;
+  final Function(DateTime) onPageChanged;
   const ConventionCalendar({
     super.key,
     required this.onDaySelected,
@@ -18,6 +19,8 @@ class ConventionCalendar extends StatefulWidget {
     required this.focusedDay,
     this.headerStyle,
     this.calendarStyle,
+    this.calendarBuilders,
+    required this.onPageChanged,
   });
 
   @override
@@ -106,32 +109,29 @@ class ConventionCalendarState extends State<ConventionCalendar>
                           Icons.arrow_forward_ios_rounded,
                           color: Colors.black),
                     ),
-                calendarBuilders: CalendarBuilders(
-                  dowBuilder: (context, day) {
-                    final text = DateFormat.E().format(day);
-                    if (day.weekday == DateTime.saturday ||
-                        day.weekday == DateTime.sunday) {
-                      return Center(
-                        child: Text(
-                          text,
-                          style: const TextStyle(
-                              color: Color(0xFFE60026), fontSize: 18),
-                        ),
-                      );
-                    }
-                    return Center(
-                      child: Text(
-                        text,
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    );
-                  },
-                ),
-                onPageChanged: (focusedDay) {
-                  _animationController.forward().then((_) {
-                    _animationController.reverse();
-                  });
-                },
+                calendarBuilders: widget.calendarBuilders ??
+                    CalendarBuilders(
+                      dowBuilder: (context, day) {
+                        final text = DateFormat.E().format(day);
+                        if (day.weekday == DateTime.saturday ||
+                            day.weekday == DateTime.sunday) {
+                          return Center(
+                            child: Text(
+                              text,
+                              style: const TextStyle(
+                                  color: Color(0xFFE60026), fontSize: 18),
+                            ),
+                          );
+                        }
+                        return Center(
+                          child: Text(
+                            text,
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                        );
+                      },
+                    ),
+                onPageChanged: widget.onPageChanged,
               );
             }),
       ),

@@ -1,1 +1,1 @@
-Please check out github to learn more
+Convention Calender is a customized version of table_calender with some prebuild ui design.
