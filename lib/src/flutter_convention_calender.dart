@@ -10,7 +10,7 @@ class ConventionCalendar extends StatefulWidget {
   final CalendarStyle? calendarStyle;
   final HeaderStyle? headerStyle;
   final CalendarBuilders? calendarBuilders;
-  final Function(DateTime) onPageChanged;
+  final Function(DateTime)? onPageChanged;
   const ConventionCalendar({
     super.key,
     required this.onDaySelected,
@@ -131,7 +131,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                         );
                       },
                     ),
-                onPageChanged: widget.onPageChanged,
+                onPageChanged: widget.onPageChanged ?? (datetime) {},
               );
             }),
       ),

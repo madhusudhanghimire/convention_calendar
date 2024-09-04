@@ -1,4 +1,3 @@
-## 0.0.4
+## 0.0.5
 
-* Fixed selected day function
-* Added OnPagedChanged Function
+* made onPageChanged nullable
