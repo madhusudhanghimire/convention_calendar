@@ -1,3 +1,3 @@
-## 0.0.7
+## 0.0.8
 
-* Late initializer error fixes
+* Changes in UI
