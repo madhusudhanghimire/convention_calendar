@@ -6,10 +6,12 @@ import 'package:table_calendar/table_calendar.dart';
 import '../utils/app_colors.dart';
 
 class ConventionCalendar extends StatefulWidget {
-  final Function(DateTime, DateTime) onDaySelected;
+  final Function(DateTime, DateTime)? onDaySelected;
   final DateTime firstDay;
   final DateTime lastDay;
   final DateTime focusedDay;
+  final DateTime? selectedDay;
+
   final CalendarStyle? calendarStyle;
   final HeaderStyle? headerStyle;
   final CalendarBuilders? calendarBuilders;
@@ -20,6 +22,7 @@ class ConventionCalendar extends StatefulWidget {
     required this.firstDay,
     required this.lastDay,
     required this.focusedDay,
+    this.selectedDay,
     this.headerStyle,
     this.calendarStyle,
     this.calendarBuilders,
@@ -73,7 +76,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
   ];
 
   DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
   String? selectedMonth;
+
   String? selectedYear;
 
   @override
@@ -115,7 +120,17 @@ class ConventionCalendarState extends State<ConventionCalendar>
         firstDay: DateTime(2000),
         lastDay: DateTime(2030),
         focusedDay: _focusedDay,
-        onDaySelected: widget.onDaySelected,
+        selectedDayPredicate: (day) {
+          return isSameDay(widget.selectedDay ?? _selectedDay, day);
+        },
+        onDaySelected: widget.onDaySelected ??
+            (selectedDay, focusedDay) {
+              setState(() {
+                _selectedDay = selectedDay;
+                _focusedDay = focusedDay;
+              });
+              _updateFocusedDay();
+            },
         calendarStyle: CalendarStyle(
           defaultTextStyle: const TextStyle(
             fontSize: 18,
