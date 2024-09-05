@@ -70,7 +70,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
   ];
 
   DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
+  DateTime? _selectedDay = DateTime.now();
   String? selectedMonth;
 
   String? selectedYear;
