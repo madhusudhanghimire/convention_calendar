@@ -111,6 +111,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
         onDisabledDayTapped: (DateTime datetime) {
           setState(() {
             selectedMonth = DateFormat("MMMM").format(datetime);
+            selectedYear = datetime.year.toString();
           });
         },
         calendarStyle: CalendarStyle(
