@@ -178,6 +178,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
               Expanded(
                 flex: 6,
                 child: CustomDropDownWidget(
+                  width: 150,
                   items: months,
                   selectedValue: selectedMonth ?? "",
                   onSelected: (value) {
