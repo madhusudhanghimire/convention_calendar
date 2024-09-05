@@ -35,11 +35,6 @@ class ConventionCalendar extends StatefulWidget {
 
 class ConventionCalendarState extends State<ConventionCalendar>
     with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> scaleAnimation;
-  late Animation<Offset> slideAnimation;
-  late Animation<double> fadeAnimation;
-
   List<String> months = [
     "January",
     "February",
@@ -84,29 +79,6 @@ class ConventionCalendarState extends State<ConventionCalendar>
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 1000),
-      vsync: this,
-    );
-    scaleAnimation = Tween<double>(begin: 0.9, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeIn,
-      ),
-    );
-    slideAnimation =
-        Tween<Offset>(begin: const Offset(1.0, 0.0), end: Offset.zero).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeInOut,
-      ),
-    );
-    fadeAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeInOut,
-      ),
-    );
     DateTime now = DateTime.now();
     selectedMonth = DateFormat('MMMM').format(now);
     selectedYear = now.year.toString();
@@ -117,6 +89,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
     return Material(
       color: Colors.white,
       child: TableCalendar(
+        pageAnimationEnabled: true,
         firstDay: DateTime(2000),
         lastDay: DateTime(2030),
         focusedDay: _focusedDay,
@@ -124,6 +97,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
           return isSameDay(widget.selectedDay ?? _selectedDay, day);
         },
         onDaySelected: (selectedDay, focusedDay) {
+          print(selectedDay);
           widget.onDaySelected!(selectedDay, focusedDay);
           _updateFocusedDay();
         },
@@ -145,11 +119,14 @@ class ConventionCalendarState extends State<ConventionCalendar>
             fontSize: 18,
           ),
           defaultDecoration: BoxDecoration(
-              color: Colors.grey.shade100,
-              borderRadius: BorderRadius.circular(8)),
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(8),
+            shape: BoxShape.rectangle,
+          ),
           weekendDecoration: BoxDecoration(
             color: Colors.red.shade100,
             borderRadius: BorderRadius.circular(8),
+            shape: BoxShape.rectangle,
           ),
           todayTextStyle: const TextStyle(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
