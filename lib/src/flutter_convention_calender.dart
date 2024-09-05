@@ -121,6 +121,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
             fontWeight: FontWeight.w500,
             fontSize: 18,
           ),
+          outsideDaysVisible: false,
           defaultDecoration: BoxDecoration(
             color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(8),
