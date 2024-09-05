@@ -97,7 +97,6 @@ class ConventionCalendarState extends State<ConventionCalendar>
           return isSameDay(widget.selectedDay ?? _selectedDay, day);
         },
         onDaySelected: (selectedDay, focusedDay) {
-          print(selectedDay);
           widget.onDaySelected!(selectedDay, focusedDay);
           _updateFocusedDay();
         },
@@ -109,8 +108,10 @@ class ConventionCalendarState extends State<ConventionCalendar>
         //       });
         //       _updateFocusedDay();
         //     },
-        onRangeSelected: (start, end, focusedDay) {
-          print("Hello");
+        onDisabledDayTapped: (DateTime datetime) {
+          setState(() {
+            selectedMonth = DateFormat("MMMM").format(datetime);
+          });
         },
         calendarStyle: CalendarStyle(
           defaultTextStyle: const TextStyle(
