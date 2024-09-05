@@ -109,6 +109,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
         //       });
         //       _updateFocusedDay();
         //     },
+        onRangeSelected: (start, end, focusedDay) {
+          print("Hello");
+        },
         calendarStyle: CalendarStyle(
           defaultTextStyle: const TextStyle(
             fontSize: 18,
