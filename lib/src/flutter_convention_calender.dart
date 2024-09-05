@@ -123,14 +123,18 @@ class ConventionCalendarState extends State<ConventionCalendar>
         selectedDayPredicate: (day) {
           return isSameDay(widget.selectedDay ?? _selectedDay, day);
         },
-        onDaySelected: widget.onDaySelected ??
-            (selectedDay, focusedDay) {
-              setState(() {
-                _selectedDay = selectedDay;
-                _focusedDay = focusedDay;
-              });
-              _updateFocusedDay();
-            },
+        onDaySelected: (selectedDay, focusedDay) {
+          widget.onDaySelected!(selectedDay, focusedDay);
+          _updateFocusedDay();
+        },
+        // widget.onDaySelected ??
+        //     (selectedDay, focusedDay) {
+        //       setState(() {
+        //         _selectedDay = selectedDay;
+        //         _focusedDay = focusedDay;
+        //       });
+        //       _updateFocusedDay();
+        //     },
         calendarStyle: CalendarStyle(
           defaultTextStyle: const TextStyle(
             fontSize: 18,
