@@ -100,20 +100,16 @@ class ConventionCalendarState extends State<ConventionCalendar>
           widget.onDaySelected!(selectedDay, focusedDay);
           _updateFocusedDay();
         },
-        // widget.onDaySelected ??
-        //     (selectedDay, focusedDay) {
-        //       setState(() {
-        //         _selectedDay = selectedDay;
-        //         _focusedDay = focusedDay;
-        //       });
-        //       _updateFocusedDay();
-        //     },
         onDisabledDayTapped: (DateTime datetime) {
           setState(() {
             selectedMonth = DateFormat("MMMM").format(datetime);
             selectedYear = datetime.year.toString();
-            _updateFocusedDay();
+            _focusedDay = datetime;
+            if (widget.onPageChanged != null) {
+              widget.onPageChanged!(_focusedDay);
+            }
           });
+          _updateFocusedDay();
         },
         calendarStyle: CalendarStyle(
           defaultTextStyle: const TextStyle(
