@@ -2,9 +2,6 @@ name: convention_calendar
 description: A Flutter package that provides a customizable calendar widget for scheduling events and managing dates.
 version: 0.0.8
 
-
-
-
 environment:
   sdk: ^3.5.1
   flutter: ">=1.17.0"

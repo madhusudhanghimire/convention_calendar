@@ -15,7 +15,7 @@ class ConventionCalendar extends StatefulWidget {
   final CalendarStyle? calendarStyle;
   final HeaderStyle? headerStyle;
   final CalendarBuilders? calendarBuilders;
-  final Function(DateTime focusedDay)? onPageChanged;
+
   const ConventionCalendar({
     super.key,
     required this.onDaySelected,
@@ -26,7 +26,6 @@ class ConventionCalendar extends StatefulWidget {
     this.headerStyle,
     this.calendarStyle,
     this.calendarBuilders,
-    this.onPageChanged,
   });
 
   @override
@@ -106,9 +105,12 @@ class ConventionCalendarState extends State<ConventionCalendar>
           setState(() {
             selectedMonth = DateFormat("MMMM").format(datetime);
             selectedYear = datetime.year.toString();
+
             _focusedDay = datetime;
+            _selectedDay = datetime;
+
+            _updateFocusedDay();
           });
-          _updateFocusedDay();
         },
         calendarStyle: CalendarStyle(
           defaultTextStyle: const TextStyle(
