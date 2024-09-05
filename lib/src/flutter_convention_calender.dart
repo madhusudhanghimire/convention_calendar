@@ -87,6 +87,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
   @override
   Widget build(BuildContext context) {
     return Material(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       color: Colors.white,
       child: TableCalendar(
         pageAnimationEnabled: true,
