@@ -147,7 +147,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
           todayTextStyle: const TextStyle(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
           todayDecoration: BoxDecoration(
-              color: Colors.grey.shade100,
+              color: Colors.grey.shade200,
               // border: Border.all(color: ColorConstants.blue, width: 2),
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(8)),
