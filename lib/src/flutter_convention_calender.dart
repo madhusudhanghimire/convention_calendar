@@ -112,6 +112,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
           setState(() {
             selectedMonth = DateFormat("MMMM").format(datetime);
             selectedYear = datetime.year.toString();
+            _updateFocusedDay();
           });
         },
         calendarStyle: CalendarStyle(
