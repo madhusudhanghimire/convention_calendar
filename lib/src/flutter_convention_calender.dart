@@ -157,29 +157,19 @@ class ConventionCalendarState extends State<ConventionCalendar>
         ),
         daysOfWeekHeight: 40,
         headerVisible: true,
-        headerStyle: HeaderStyle(
-          leftChevronMargin: const EdgeInsets.all(0),
-          leftChevronPadding: const EdgeInsets.all(0),
-          rightChevronMargin: const EdgeInsets.all(0),
-          rightChevronPadding: const EdgeInsets.all(0),
+        headerStyle: const HeaderStyle(
+          leftChevronMargin: EdgeInsets.all(0),
+          leftChevronPadding: EdgeInsets.all(0),
+          rightChevronMargin: EdgeInsets.all(0),
+          rightChevronPadding: EdgeInsets.all(0),
           titleCentered: true,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 4.0,
-                  spreadRadius: 2.0,
-                  color: Colors.grey.shade200,
-                )
-              ]),
-          headerMargin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+          headerMargin: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+          headerPadding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
           formatButtonVisible: false,
           leftChevronIcon:
-              const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
+              Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
           rightChevronIcon:
-              const Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
+              Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
         ),
         calendarBuilders: CalendarBuilders(
           headerTitleBuilder: (context, date) => Row(
