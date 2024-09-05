@@ -114,21 +114,21 @@ class ConventionCalendarState extends State<ConventionCalendar>
         },
         calendarStyle: CalendarStyle(
           defaultTextStyle: const TextStyle(
-            fontSize: 18,
+            fontSize: 16,
           ),
           weekendTextStyle: TextStyle(
             color: ColorConstants.error,
             fontWeight: FontWeight.w500,
-            fontSize: 18,
+            fontSize: 16,
           ),
           outsideDaysVisible: false,
           defaultDecoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            // color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(8),
             shape: BoxShape.rectangle,
           ),
           weekendDecoration: BoxDecoration(
-            color: Colors.red.shade100,
+            // color: Colors.red.shade100,
             borderRadius: BorderRadius.circular(8),
             shape: BoxShape.rectangle,
           ),
@@ -147,7 +147,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
           todayDecoration: BoxDecoration(
               color: Colors.grey.shade100,
-              border: Border.all(color: ColorConstants.blue, width: 2),
+              // border: Border.all(color: ColorConstants.blue, width: 2),
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(8)),
           selectedDecoration: BoxDecoration(
@@ -212,15 +212,17 @@ class ConventionCalendarState extends State<ConventionCalendar>
               return Center(
                 child: Text(
                   text,
-                  style:
-                      const TextStyle(color: Color(0xFFE60026), fontSize: 18),
+                  style: const TextStyle(
+                      color: Color(0xFFE60026),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500),
                 ),
               );
             }
             return Center(
               child: Text(
                 text,
-                style: const TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 16),
               ),
             );
           },
