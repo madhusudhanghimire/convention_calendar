@@ -91,8 +91,8 @@ class ConventionCalendarState extends State<ConventionCalendar>
       color: Colors.white,
       child: TableCalendar(
         pageAnimationEnabled: true,
-        firstDay: DateTime(2000),
-        lastDay: DateTime(2030),
+        firstDay: widget.firstDay,
+        lastDay: widget.lastDay,
         focusedDay: _focusedDay,
         selectedDayPredicate: (day) {
           return isSameDay(widget.selectedDay ?? _selectedDay, day);
@@ -101,14 +101,12 @@ class ConventionCalendarState extends State<ConventionCalendar>
           widget.onDaySelected!(selectedDay, focusedDay);
           _updateFocusedDay();
         },
+        pageJumpingEnabled: true,
         onDisabledDayTapped: (DateTime datetime) {
           setState(() {
             selectedMonth = DateFormat("MMMM").format(datetime);
             selectedYear = datetime.year.toString();
             _focusedDay = datetime;
-            if (widget.onPageChanged != null) {
-              widget.onPageChanged!(_focusedDay);
-            }
           });
           _updateFocusedDay();
         },
