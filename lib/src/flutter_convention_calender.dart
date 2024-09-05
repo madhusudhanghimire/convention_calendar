@@ -152,8 +152,8 @@ class ConventionCalendarState extends State<ConventionCalendar>
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(8)),
           selectedDecoration: BoxDecoration(
-            color: (widget.selectedDay)?.day == DateTime.saturday ||
-                    (widget.selectedDay)?.day == DateTime.sunday
+            color: (widget.selectedDay)?.weekday == DateTime.saturday ||
+                    (widget.selectedDay)?.weekday == DateTime.sunday
                 ? ColorConstants.error
                 : ColorConstants.blue,
             borderRadius: BorderRadius.circular(8),
