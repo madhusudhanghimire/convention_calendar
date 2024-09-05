@@ -6,7 +6,7 @@ import 'package:table_calendar/table_calendar.dart';
 import '../utils/app_colors.dart';
 
 class ConventionCalendar extends StatefulWidget {
-  final Function(DateTime, DateTime)? onDaySelected;
+  final Function(DateTime selectedDay, DateTime focusedDay)? onDaySelected;
   final DateTime firstDay;
   final DateTime lastDay;
   final DateTime focusedDay;
@@ -15,7 +15,7 @@ class ConventionCalendar extends StatefulWidget {
   final CalendarStyle? calendarStyle;
   final HeaderStyle? headerStyle;
   final CalendarBuilders? calendarBuilders;
-  final Function(DateTime)? onPageChanged;
+  final Function(DateTime focusedDay)? onPageChanged;
   const ConventionCalendar({
     super.key,
     required this.onDaySelected,
