@@ -83,322 +83,313 @@ class ConventionCalendarState extends State<ConventionCalendar>
 
   @override
   Widget build(BuildContext context) {
-    return StatefulBuilder(builder: (context, setState) {
-      return Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        backgroundColor: Colors.white,
-        insetPadding: const EdgeInsets.symmetric(horizontal: 12),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Material(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              color: Colors.white,
-              child: TableCalendar(
-                startingDayOfWeek: StartingDayOfWeek.monday,
-                pageAnimationEnabled: true,
-                firstDay: widget.firstDay,
-                lastDay: widget.lastDay,
-                focusedDay: _focusedDay,
-                selectedDayPredicate: (day) {
-                  return isSameDay(widget.selectedDay ?? _selectedDay, day);
-                },
-                onDaySelected: (selectedDay, focusedDay) {
-                  setState(() {
-                    widget.onDaySelected!(selectedDay, focusedDay);
-                    rangeStart = null;
-                    rangeEnd = null;
-                  });
-                  _updateFocusedDay();
-                },
-                pageJumpingEnabled: true,
-                onDisabledDayTapped: (DateTime datetime) {
-                  setState(() {
-                    selectedMonth = DateFormat("MMMM").format(datetime);
-                    selectedYear = datetime.year.toString();
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      backgroundColor: Colors.white,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 12),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Material(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            color: Colors.white,
+            child: TableCalendar(
+              startingDayOfWeek: StartingDayOfWeek.monday,
+              pageAnimationEnabled: true,
+              firstDay: widget.firstDay,
+              lastDay: widget.lastDay,
+              focusedDay: _focusedDay,
+              selectedDayPredicate: (day) {
+                return isSameDay(widget.selectedDay ?? _selectedDay, day);
+              },
+              onDaySelected: (selectedDay, focusedDay) {
+                setState(() {
+                  widget.onDaySelected!(selectedDay, focusedDay);
+                  rangeStart = null;
+                  rangeEnd = null;
+                });
+                _updateFocusedDay();
+              },
+              pageJumpingEnabled: true,
+              onDisabledDayTapped: (DateTime datetime) {
+                setState(() {
+                  selectedMonth = DateFormat("MMMM").format(datetime);
+                  selectedYear = datetime.year.toString();
 
-                    _focusedDay = datetime;
-                    _selectedDay = datetime;
+                  _focusedDay = datetime;
+                  _selectedDay = datetime;
 
-                    _updateFocusedDay();
-                  });
-                },
-                onFormatChanged: (format) {
-                  if (calendarFormat != format) {
-                    setState(() {
-                      calendarFormat = format;
-                    });
-                  }
-                },
-                rangeSelectionMode: widget.isRangeEnabled
-                    ? RangeSelectionMode.enforced
-                    : RangeSelectionMode.disabled,
-                onRangeSelected: (start, end, focusedDay) {
-                  setState(() {
-                    _selectedDay = null;
-                    _focusedDay = focusedDay;
-                    rangeStart = start;
-                    rangeEnd = end;
-                    widget.isRangeEnabled
-                        ? RangeSelectionMode.enforced
-                        : RangeSelectionMode.disabled;
-                  });
                   _updateFocusedDay();
+                });
+              },
+              onFormatChanged: (format) {
+                if (calendarFormat != format) {
+                  setState(() {
+                    calendarFormat = format;
+                  });
+                }
+              },
+              rangeSelectionMode: widget.isRangeEnabled
+                  ? RangeSelectionMode.enforced
+                  : RangeSelectionMode.disabled,
+              onRangeSelected: (start, end, focusedDay) {
+                setState(() {
+                  _selectedDay = null;
+                  _focusedDay = focusedDay;
+                  rangeStart = start;
+                  rangeEnd = end;
+                  widget.isRangeEnabled
+                      ? RangeSelectionMode.enforced
+                      : RangeSelectionMode.disabled;
+                });
+                _updateFocusedDay();
+              },
+              rangeEndDay: rangeEnd,
+              rangeStartDay: rangeStart,
+              calendarStyle: CalendarStyle(
+                defaultTextStyle: const TextStyle(
+                  fontSize: 16,
+                ),
+                weekendTextStyle: TextStyle(
+                  color: ColorConstants.error,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+                outsideDaysVisible: false,
+                rangeStartDecoration: BoxDecoration(
+                  color: ColorConstants.blue,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                rangeEndDecoration: BoxDecoration(
+                  color: ColorConstants.blue,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                defaultDecoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  shape: BoxShape.rectangle,
+                ),
+                isTodayHighlighted: true,
+                weekendDecoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  shape: BoxShape.rectangle,
+                ),
+                withinRangeDecoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                rangeHighlightColor: widget.rangeHighLightColor ?? Colors.white,
+                outsideDecoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                withinRangeTextStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500),
+                todayTextStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500),
+                todayDecoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                selectedDecoration: BoxDecoration(
+                  color: (widget.selectedDay)?.weekday == DateTime.saturday ||
+                          (widget.selectedDay)?.weekday == DateTime.sunday
+                      ? ColorConstants.error
+                      : ColorConstants.blue,
+                  borderRadius: BorderRadius.circular(8),
+                  shape: BoxShape.rectangle,
+                ),
+                selectedTextStyle: const TextStyle(color: Colors.white),
+              ),
+              daysOfWeekHeight: 40,
+              headerVisible: true,
+              headerStyle: const HeaderStyle(
+                leftChevronMargin: EdgeInsets.all(0),
+                leftChevronPadding: EdgeInsets.all(0),
+                rightChevronMargin: EdgeInsets.all(0),
+                rightChevronPadding: EdgeInsets.all(0),
+                titleCentered: true,
+                headerMargin: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                headerPadding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+                formatButtonVisible: false,
+                leftChevronIcon:
+                    Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
+                rightChevronIcon:
+                    Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
+              ),
+              calendarBuilders: CalendarBuilders(
+                todayBuilder: (context, day, focusedDay) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: (rangeStart == null || rangeEnd == null)
+                          ? Colors.grey.shade200
+                          : null,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      day.day.toString(),
+                      style: const TextStyle(fontSize: 16, color: Colors.black),
+                    ),
+                  );
                 },
-                rangeEndDay: rangeEnd,
-                rangeStartDay: rangeStart,
-                calendarStyle: CalendarStyle(
-                  defaultTextStyle: const TextStyle(
-                    fontSize: 16,
-                  ),
-                  weekendTextStyle: TextStyle(
-                    color: ColorConstants.error,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                  outsideDaysVisible: false,
-                  rangeStartDecoration: BoxDecoration(
-                    color: ColorConstants.blue,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  rangeEndDecoration: BoxDecoration(
-                    color: ColorConstants.blue,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  defaultDecoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    shape: BoxShape.rectangle,
-                  ),
-                  isTodayHighlighted: true,
-                  weekendDecoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    shape: BoxShape.rectangle,
-                  ),
-                  withinRangeDecoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  rangeHighlightColor:
-                      widget.rangeHighLightColor ?? Colors.white,
-                  outsideDecoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  withinRangeTextStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500),
-                  todayTextStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500),
-                  todayDecoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  selectedDecoration: BoxDecoration(
-                    color: (widget.selectedDay)?.weekday == DateTime.saturday ||
-                            (widget.selectedDay)?.weekday == DateTime.sunday
-                        ? ColorConstants.error
-                        : ColorConstants.blue,
-                    borderRadius: BorderRadius.circular(8),
-                    shape: BoxShape.rectangle,
-                  ),
-                  selectedTextStyle: const TextStyle(color: Colors.white),
+                rangeStartBuilder: (context, day, focusedDay) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: ColorConstants.blue,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      day.day.toString(),
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  );
+                },
+                selectedBuilder: (context, day, focusedDay) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: ColorConstants.blue,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      day.day.toString(),
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  );
+                },
+                rangeEndBuilder: (context, day, focusedDay) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: ColorConstants.blue,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      day.day.toString(),
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  );
+                },
+                rangeHighlightBuilder: (context, day, isWithinRange) {
+                  return isWithinRange &&
+                          !(day == rangeStart || day == rangeEnd)
+                      ? Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade200,
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            day.day.toString(),
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.black),
+                          ),
+                        )
+                      : const SizedBox();
+                },
+                headerTitleBuilder: (context, date) => Row(
+                  children: [
+                    Expanded(
+                      flex: 6,
+                      child: CustomDropDownWidget(
+                        width: 150,
+                        items: months,
+                        selectedValue: selectedMonth ?? "",
+                        onSelected: (value) {
+                          setState(() {
+                            selectedMonth = value;
+                          });
+                          _updateFocusedDay();
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: CustomDropDownWidget(
+                        items: years,
+                        selectedValue: selectedYear ?? "",
+                        onSelected: (value) {
+                          setState(() {
+                            selectedYear = value;
+                          });
+                          _updateFocusedDay();
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                daysOfWeekHeight: 40,
-                headerVisible: true,
-                headerStyle: const HeaderStyle(
-                  leftChevronMargin: EdgeInsets.all(0),
-                  leftChevronPadding: EdgeInsets.all(0),
-                  rightChevronMargin: EdgeInsets.all(0),
-                  rightChevronPadding: EdgeInsets.all(0),
-                  titleCentered: true,
-                  headerMargin:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-                  headerPadding:
-                      EdgeInsets.symmetric(vertical: 6, horizontal: 8),
-                  formatButtonVisible: false,
-                  leftChevronIcon: Icon(Icons.arrow_back_ios_new_rounded,
-                      color: Colors.black),
-                  rightChevronIcon: Icon(Icons.arrow_forward_ios_rounded,
-                      color: Colors.black),
-                ),
-                calendarBuilders: CalendarBuilders(
-                  todayBuilder: (context, day, focusedDay) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: (rangeStart == null || rangeEnd == null)
-                            ? Colors.grey.shade200
-                            : null,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        day.day.toString(),
-                        style:
-                            const TextStyle(fontSize: 16, color: Colors.black),
-                      ),
-                    );
-                  },
-                  rangeStartBuilder: (context, day, focusedDay) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: ColorConstants.blue,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        day.day.toString(),
-                        style:
-                            const TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    );
-                  },
-                  selectedBuilder: (context, day, focusedDay) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: ColorConstants.blue,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        day.day.toString(),
-                        style:
-                            const TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    );
-                  },
-                  rangeEndBuilder: (context, day, focusedDay) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: ColorConstants.blue,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        day.day.toString(),
-                        style:
-                            const TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    );
-                  },
-                  rangeHighlightBuilder: (context, day, isWithinRange) {
-                    return isWithinRange &&
-                            !(day == rangeStart || day == rangeEnd)
-                        ? Container(
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
-                            ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              day.day.toString(),
-                              style: const TextStyle(
-                                  fontSize: 16, color: Colors.black),
-                            ),
-                          )
-                        : const SizedBox();
-                  },
-                  headerTitleBuilder: (context, date) => Row(
-                    children: [
-                      Expanded(
-                        flex: 6,
-                        child: CustomDropDownWidget(
-                          width: 150,
-                          items: months,
-                          selectedValue: selectedMonth ?? "",
-                          onSelected: (value) {
-                            setState(() {
-                              selectedMonth = value;
-                            });
-                            _updateFocusedDay();
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        flex: 4,
-                        child: CustomDropDownWidget(
-                          items: years,
-                          selectedValue: selectedYear ?? "",
-                          onSelected: (value) {
-                            setState(() {
-                              selectedYear = value;
-                            });
-                            _updateFocusedDay();
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  dowBuilder: (context, day) {
-                    final text = DateFormat.E().format(day);
-                    if (day.weekday == DateTime.saturday ||
-                        day.weekday == DateTime.sunday) {
-                      return Center(
-                        child: Text(
-                          text,
-                          style: const TextStyle(
-                              color: Color(0xFFE60026),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      );
-                    }
+                dowBuilder: (context, day) {
+                  final text = DateFormat.E().format(day);
+                  if (day.weekday == DateTime.saturday ||
+                      day.weekday == DateTime.sunday) {
                     return Center(
                       child: Text(
                         text,
-                        style: const TextStyle(fontSize: 16),
+                        style: const TextStyle(
+                            color: Color(0xFFE60026),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
                       ),
                     );
-                  },
-                ),
-                onPageChanged: (focusedDay) {
-                  _focusedDay = focusedDay;
-                  selectedMonth = DateFormat('MMMM').format(focusedDay);
-                  selectedYear = focusedDay.year.toString();
+                  }
+                  return Center(
+                    child: Text(
+                      text,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  );
                 },
               ),
+              onPageChanged: (focusedDay) {
+                _focusedDay = focusedDay;
+                selectedMonth = DateFormat('MMMM').format(focusedDay);
+                selectedYear = focusedDay.year.toString();
+              },
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: ColorConstants.error,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Cancel')),
-                const SizedBox(
-                  width: 12,
-                ),
-                TextButton(
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
                   style: TextButton.styleFrom(
-                    foregroundColor: ColorConstants.blue,
+                    foregroundColor: ColorConstants.error,
                   ),
                   onPressed: () {
-                    print(rangeStart);
-                    print(rangeEnd);
-                    print(widget.selectedDay);
+                    Navigator.of(context).pop();
                   },
-                  child: const Text('Select'),
+                  child: const Text('Cancel')),
+              const SizedBox(
+                width: 12,
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: ColorConstants.blue,
                 ),
-                const SizedBox(
-                  width: 24,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 12,
-            )
-          ],
-        ),
-      );
-    });
+                onPressed: () {
+                  print(rangeStart);
+                  print(rangeEnd);
+                  print(widget.selectedDay);
+                },
+                child: const Text('Select'),
+              ),
+              const SizedBox(
+                width: 24,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 12,
+          )
+        ],
+      ),
+    );
   }
 
   void _updateFocusedDay() {
