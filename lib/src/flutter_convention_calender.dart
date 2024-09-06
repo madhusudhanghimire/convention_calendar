@@ -92,7 +92,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
   @override
   Widget build(BuildContext context) {
     return Material(
-      shape: RoundedcircleBorder(borderRadius: BorderRadius.circular(8)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       color: Colors.white,
       child: TableCalendar(
         startingDayOfWeek: StartingDayOfWeek.monday,
@@ -155,32 +155,29 @@ class ConventionCalendarState extends State<ConventionCalendar>
           outsideDaysVisible: false,
           rangeStartDecoration: BoxDecoration(
             color: ColorConstants.blue,
-            shape: BoxShape.circle,
+            shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(8),
           ),
           rangeEndDecoration: BoxDecoration(
             color: ColorConstants.blue,
-            shape: BoxShape.circle,
+            shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(8),
           ),
           defaultDecoration: BoxDecoration(
-            // color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(8),
-            shape: BoxShape.circle,
+            shape: BoxShape.rectangle,
           ),
           weekendDecoration: BoxDecoration(
-            // color: Colors.red.shade100,
             borderRadius: BorderRadius.circular(8),
-            shape: BoxShape.circle,
+            shape: BoxShape.rectangle,
           ),
           withinRangeDecoration: BoxDecoration(
-            color: ColorConstants.blue,
-            shape: BoxShape.circle,
+            shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(8),
           ),
-          rangeHighlightColor: ColorConstants.blue,
+          rangeHighlightColor: ColorConstants.blue.withOpacity(0.3),
           outsideDecoration: BoxDecoration(
-            shape: BoxShape.circle,
+            shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(8),
           ),
           withinRangeTextStyle: const TextStyle(
@@ -190,7 +187,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
           todayDecoration: BoxDecoration(
               color: Colors.grey.shade200,
               // border: Border.all(color: ColorConstants.blue, width: 2),
-              shape: BoxShape.circle,
+              shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(8)),
           selectedDecoration: BoxDecoration(
             color: (widget.selectedDay)?.weekday == DateTime.saturday ||
@@ -198,7 +195,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                 ? ColorConstants.error
                 : ColorConstants.blue,
             borderRadius: BorderRadius.circular(8),
-            shape: BoxShape.circle,
+            shape: BoxShape.rectangle,
           ),
           selectedTextStyle: const TextStyle(color: Colors.white),
         ),
