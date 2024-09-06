@@ -12,6 +12,7 @@ class ConventionCalendar extends StatefulWidget {
   final DateTime focusedDay;
   final DateTime? selectedDay;
   final bool isRangeEnabled;
+  final Color? rangeHighLightColor;
   final CalendarStyle? calendarStyle;
   final HeaderStyle? headerStyle;
   final CalendarBuilders? calendarBuilders;
@@ -27,6 +28,7 @@ class ConventionCalendar extends StatefulWidget {
     this.calendarStyle,
     this.calendarBuilders,
     this.isRangeEnabled = false,
+    this.rangeHighLightColor,
   });
 
   @override
@@ -176,7 +178,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(8),
           ),
-          rangeHighlightColor: ColorConstants.blueIce,
+          rangeHighlightColor: widget.rangeHighLightColor ?? Colors.white,
           outsideDecoration: BoxDecoration(
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(8),
