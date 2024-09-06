@@ -5,19 +5,20 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../utils/app_colors.dart';
 
+// ignore: must_be_immutable
 class ConventionCalendar extends StatefulWidget {
   final Function(DateTime selectedDay, DateTime focusedDay)? onDaySelected;
   final DateTime firstDay;
   final DateTime lastDay;
   final DateTime focusedDay;
-  final DateTime? selectedDay;
+  DateTime? selectedDay;
   final bool isRangeEnabled;
   final Color? rangeHighLightColor;
   final CalendarStyle? calendarStyle;
   final HeaderStyle? headerStyle;
   final CalendarBuilders? calendarBuilders;
 
-  const ConventionCalendar({
+  ConventionCalendar({
     super.key,
     required this.onDaySelected,
     required this.firstDay,
@@ -79,6 +80,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
     selectedMonth = DateFormat('MMMM').format(now);
     selectedYear = now.year.toString();
     years = _generateYears(widget.firstDay, widget.lastDay);
+    if (widget.isRangeEnabled) {
+      widget.selectedDay = null;
+    }
   }
 
   @override
@@ -263,26 +267,15 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   },
                   selectedBuilder: (context, day, focusedDay) {
                     return Container(
-                      decoration: widget.isRangeEnabled == true
-                          ? null
-                          : BoxDecoration(
-                              color: (widget.selectedDay)?.weekday ==
-                                          DateTime.saturday ||
-                                      (widget.selectedDay)?.weekday ==
-                                          DateTime.sunday
-                                  ? ColorConstants.error
-                                  : ColorConstants.blue,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
+                      decoration: BoxDecoration(
+                        color: ColorConstants.blue,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                       alignment: Alignment.center,
                       child: Text(
                         day.day.toString(),
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: widget.isRangeEnabled
-                              ? Colors.black
-                              : Colors.white,
-                        ),
+                        style:
+                            const TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     );
                   },
