@@ -108,9 +108,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
           widget.onDaySelected!(selectedDay, focusedDay);
           rangeStart = null;
           rangeEnd = null;
-          rangeSelectionMode = widget.isRangeEnabled
-              ? RangeSelectionMode.toggledOff
-              : RangeSelectionMode.enforced;
+          // rangeSelectionMode = widget.isRangeEnabled
+          //     ? RangeSelectionMode.toggledOff
+          //     : RangeSelectionMode.enforced;
           _updateFocusedDay();
         },
         pageJumpingEnabled: true,
