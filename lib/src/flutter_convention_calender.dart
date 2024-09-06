@@ -109,7 +109,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
                 },
                 onDaySelected: (selectedDay, focusedDay) {
                   setState(() {
-                    widget.onDaySelected!(selectedDay, focusedDay);
+                    widget.isRangeEnabled == true
+                        ? null
+                        : widget.onDaySelected!(selectedDay, focusedDay);
                     rangeStart = null;
                     rangeEnd = null;
                   });
