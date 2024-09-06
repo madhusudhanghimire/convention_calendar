@@ -153,6 +153,16 @@ class ConventionCalendarState extends State<ConventionCalendar>
             fontSize: 16,
           ),
           outsideDaysVisible: false,
+          rangeStartDecoration: BoxDecoration(
+            color: ColorConstants.blue,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          rangeEndDecoration: BoxDecoration(
+            color: ColorConstants.blue,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(8),
+          ),
           defaultDecoration: BoxDecoration(
             // color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(8),
