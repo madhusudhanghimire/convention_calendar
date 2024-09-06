@@ -113,6 +113,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
             _updateFocusedDay();
           });
         },
+        rangeSelectionMode: RangeSelectionMode.toggledOn,
         calendarStyle: CalendarStyle(
           defaultTextStyle: const TextStyle(
             fontSize: 16,
