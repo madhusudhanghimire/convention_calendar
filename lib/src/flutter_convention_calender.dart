@@ -53,25 +53,15 @@ class ConventionCalendarState extends State<ConventionCalendar>
     "December"
   ];
 
-  List<String> years = [
-    "2014",
-    "2015",
-    "2016",
-    "2017",
-    "2018",
-    "2019",
-    "2020",
-    "2021",
-    "2022",
-    "2023",
-    "2024",
-    "2025",
-    "2026",
-    "2027",
-    "2028",
-    "2029",
-    "2030"
-  ];
+  List<String> years = [];
+
+  List<String> _generateYears(DateTime firstDate, DateTime lastDate) {
+    List<String> yearRange = [];
+    for (int year = firstDate.year; year <= lastDate.year; year++) {
+      yearRange.add(year.toString());
+    }
+    return yearRange;
+  }
 
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay = DateTime.now();
@@ -88,6 +78,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
     DateTime now = DateTime.now();
     selectedMonth = DateFormat('MMMM').format(now);
     selectedYear = now.year.toString();
+    years = _generateYears(widget.firstDay, widget.lastDay);
   }
 
   @override
