@@ -15,5 +15,7 @@ class ColorConstants {
   static Color green = getColor("046244");
   static Color grey50 = getColor("dedee0");
   static Color warning = getColor("c4aa15");
-  static Color blueAccent = getColor('2b74a1');
+  static Color blueJelly = getColor('2b74a1');
+  static Color blueFontain = getColor('50a6c3');
+  static Color blueGlory = getColor('91c8d9');
 }
