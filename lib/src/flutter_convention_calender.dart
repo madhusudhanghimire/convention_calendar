@@ -86,6 +86,8 @@ class ConventionCalendarState extends State<ConventionCalendar>
     selectedYear = now.year.toString();
   }
 
+  RangeSelectionMode rangeSelectionMode = RangeSelectionMode.toggledOn;
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -102,6 +104,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
         },
         onDaySelected: (selectedDay, focusedDay) {
           widget.onDaySelected!(selectedDay, focusedDay);
+          rangeStart = null;
+          rangeEnd = null;
+          rangeSelectionMode = RangeSelectionMode.toggledOff;
           _updateFocusedDay();
         },
         pageJumpingEnabled: true,
@@ -116,11 +121,14 @@ class ConventionCalendarState extends State<ConventionCalendar>
             _updateFocusedDay();
           });
         },
-        rangeSelectionMode: RangeSelectionMode.toggledOn,
+        rangeSelectionMode: rangeSelectionMode,
         onRangeSelected: (start, end, focusedDay) {
           setState(() {
+            _selectedDay = null;
+            _focusedDay = focusedDay;
             rangeStart = start;
             rangeEnd = end;
+            rangeSelectionMode = RangeSelectionMode.toggledOn;
           });
         },
         calendarStyle: CalendarStyle(
