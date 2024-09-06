@@ -277,8 +277,12 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       alignment: Alignment.center,
                       child: Text(
                         day.day.toString(),
-                        style:
-                            const TextStyle(fontSize: 16, color: Colors.white),
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: widget.isRangeEnabled
+                              ? Colors.black
+                              : Colors.white,
+                        ),
                       ),
                     );
                   },
