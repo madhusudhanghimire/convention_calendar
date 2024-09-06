@@ -11,7 +11,8 @@ class ConventionCalendar extends StatefulWidget {
   final DateTime lastDay;
   final DateTime focusedDay;
   final DateTime? selectedDay;
-
+  final bool isRangeEnabled;
+  final Color? rangeHighLightColor;
   final CalendarStyle? calendarStyle;
   final HeaderStyle? headerStyle;
   final CalendarBuilders? calendarBuilders;
@@ -26,6 +27,8 @@ class ConventionCalendar extends StatefulWidget {
     this.headerStyle,
     this.calendarStyle,
     this.calendarBuilders,
+    this.isRangeEnabled = false,
+    this.rangeHighLightColor,
   });
 
   @override
@@ -34,6 +37,7 @@ class ConventionCalendar extends StatefulWidget {
 
 class ConventionCalendarState extends State<ConventionCalendar>
     with SingleTickerProviderStateMixin {
+  CalendarFormat calendarFormat = CalendarFormat.month;
   List<String> months = [
     "January",
     "February",
@@ -49,29 +53,22 @@ class ConventionCalendarState extends State<ConventionCalendar>
     "December"
   ];
 
-  List<String> years = [
-    "2014",
-    "2015",
-    "2016",
-    "2017",
-    "2018",
-    "2019",
-    "2020",
-    "2021",
-    "2022",
-    "2023",
-    "2024",
-    "2025",
-    "2026",
-    "2027",
-    "2028",
-    "2029",
-    "2030"
-  ];
+  List<String> years = [];
+
+  List<String> _generateYears(DateTime firstDate, DateTime lastDate) {
+    List<String> yearRange = [];
+    for (int year = firstDate.year; year <= lastDate.year; year++) {
+      yearRange.add(year.toString());
+    }
+    return yearRange;
+  }
 
   DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
+  DateTime? _selectedDay = DateTime.now();
   String? selectedMonth;
+
+  DateTime? rangeStart;
+  DateTime? rangeEnd;
 
   String? selectedYear;
 
@@ -81,6 +78,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
     DateTime now = DateTime.now();
     selectedMonth = DateFormat('MMMM').format(now);
     selectedYear = now.year.toString();
+    years = _generateYears(widget.firstDay, widget.lastDay);
   }
 
   @override
@@ -89,6 +87,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       color: Colors.white,
       child: TableCalendar(
+        startingDayOfWeek: StartingDayOfWeek.monday,
         pageAnimationEnabled: true,
         firstDay: widget.firstDay,
         lastDay: widget.lastDay,
@@ -98,6 +97,8 @@ class ConventionCalendarState extends State<ConventionCalendar>
         },
         onDaySelected: (selectedDay, focusedDay) {
           widget.onDaySelected!(selectedDay, focusedDay);
+          rangeStart = null;
+          rangeEnd = null;
           _updateFocusedDay();
         },
         pageJumpingEnabled: true,
@@ -112,45 +113,81 @@ class ConventionCalendarState extends State<ConventionCalendar>
             _updateFocusedDay();
           });
         },
+        onFormatChanged: (format) {
+          if (calendarFormat != format) {
+            setState(() {
+              calendarFormat = format;
+            });
+          }
+        },
+        rangeSelectionMode: widget.isRangeEnabled
+            ? RangeSelectionMode.enforced
+            : RangeSelectionMode.disabled,
+        onRangeSelected: (start, end, focusedDay) {
+          setState(() {
+            _selectedDay = null;
+            _focusedDay = focusedDay;
+            rangeStart = start;
+            rangeEnd = end;
+            widget.isRangeEnabled
+                ? RangeSelectionMode.enforced
+                : RangeSelectionMode.disabled;
+          });
+          _updateFocusedDay();
+        },
+        rangeEndDay: rangeEnd,
+        rangeStartDay: rangeStart,
         calendarStyle: CalendarStyle(
           defaultTextStyle: const TextStyle(
-            fontSize: 18,
+            fontSize: 16,
           ),
           weekendTextStyle: TextStyle(
             color: ColorConstants.error,
             fontWeight: FontWeight.w500,
-            fontSize: 18,
+            fontSize: 16,
+          ),
+          outsideDaysVisible: false,
+          rangeStartDecoration: BoxDecoration(
+            color: ColorConstants.blue,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          rangeEndDecoration: BoxDecoration(
+            color: ColorConstants.blue,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(8),
           ),
           defaultDecoration: BoxDecoration(
-            color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(8),
             shape: BoxShape.rectangle,
           ),
+          isTodayHighlighted: true,
           weekendDecoration: BoxDecoration(
-            color: Colors.red.shade100,
             borderRadius: BorderRadius.circular(8),
             shape: BoxShape.rectangle,
           ),
           withinRangeDecoration: BoxDecoration(
-            color: Colors.grey.shade100,
-            border: Border.all(color: ColorConstants.blue, width: 2),
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(8),
           ),
+          rangeHighlightColor: widget.rangeHighLightColor ?? Colors.white,
           outsideDecoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(8)),
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(8),
+          ),
           withinRangeTextStyle: const TextStyle(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
           todayTextStyle: const TextStyle(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
           todayDecoration: BoxDecoration(
-              color: Colors.grey.shade100,
-              border: Border.all(color: ColorConstants.blue, width: 2),
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(8)),
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(100),
+          ),
           selectedDecoration: BoxDecoration(
-            color: ColorConstants.blue,
+            color: (widget.selectedDay)?.weekday == DateTime.saturday ||
+                    (widget.selectedDay)?.weekday == DateTime.sunday
+                ? ColorConstants.error
+                : ColorConstants.blue,
             borderRadius: BorderRadius.circular(8),
             shape: BoxShape.rectangle,
           ),
@@ -173,6 +210,74 @@ class ConventionCalendarState extends State<ConventionCalendar>
               Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
         ),
         calendarBuilders: CalendarBuilders(
+          todayBuilder: (context, day, focusedDay) {
+            return Container(
+              decoration: BoxDecoration(
+                color: (rangeStart == null || rangeEnd == null)
+                    ? Colors.grey.shade200
+                    : null,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(fontSize: 16, color: Colors.black),
+              ),
+            );
+          },
+          rangeStartBuilder: (context, day, focusedDay) {
+            return Container(
+              decoration: BoxDecoration(
+                color: ColorConstants.blue,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(fontSize: 16, color: Colors.white),
+              ),
+            );
+          },
+          selectedBuilder: (context, day, focusedDay) {
+            return Container(
+              decoration: BoxDecoration(
+                color: ColorConstants.blue,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(fontSize: 16, color: Colors.white),
+              ),
+            );
+          },
+          rangeEndBuilder: (context, day, focusedDay) {
+            return Container(
+              decoration: BoxDecoration(
+                color: ColorConstants.blue,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(fontSize: 16, color: Colors.white),
+              ),
+            );
+          },
+          rangeHighlightBuilder: (context, day, isWithinRange) {
+            return isWithinRange && !(day == rangeStart || day == rangeEnd)
+                ? Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      day.day.toString(),
+                      style: const TextStyle(fontSize: 16, color: Colors.black),
+                    ),
+                  )
+                : const SizedBox();
+          },
           headerTitleBuilder: (context, date) => Row(
             children: [
               Expanded(
@@ -211,15 +316,17 @@ class ConventionCalendarState extends State<ConventionCalendar>
               return Center(
                 child: Text(
                   text,
-                  style:
-                      const TextStyle(color: Color(0xFFE60026), fontSize: 18),
+                  style: const TextStyle(
+                      color: Color(0xFFE60026),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500),
                 ),
               );
             }
             return Center(
               child: Text(
                 text,
-                style: const TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 16),
               ),
             );
           },
