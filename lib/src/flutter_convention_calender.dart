@@ -131,6 +131,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
         },
         rangeSelectionMode: rangeSelectionMode,
         onRangeSelected: (start, end, focusedDay) {
+          print('Start: $start, End: $end, Focused: $focusedDay');
           setState(() {
             _selectedDay = null;
             _focusedDay = focusedDay;
@@ -138,7 +139,10 @@ class ConventionCalendarState extends State<ConventionCalendar>
             rangeEnd = end;
             rangeSelectionMode = RangeSelectionMode.toggledOn;
           });
+          _updateFocusedDay();
         },
+        rangeEndDay: rangeEnd,
+        rangeStartDay: rangeStart,
         calendarStyle: CalendarStyle(
           defaultTextStyle: const TextStyle(
             fontSize: 16,
