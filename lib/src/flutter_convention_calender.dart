@@ -221,7 +221,6 @@ class ConventionCalendarState extends State<ConventionCalendar>
         calendarBuilders: CalendarBuilders(
           todayBuilder: (context, day, focusedDay) {
             return Container(
-              margin: const EdgeInsets.all(4),
               decoration: BoxDecoration(color: Colors.grey.shade200),
               alignment: Alignment.center,
               child: Text(
@@ -230,10 +229,29 @@ class ConventionCalendarState extends State<ConventionCalendar>
               ),
             );
           },
+          rangeStartBuilder: (context, day, focusedDay) {
+            return Container(
+              decoration: BoxDecoration(color: ColorConstants.blue),
+              alignment: Alignment.center,
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(fontSize: 16, color: Colors.white),
+              ),
+            );
+          },
+          rangeEndBuilder: (context, day, focusedDay) {
+            return Container(
+              decoration: BoxDecoration(color: ColorConstants.blue),
+              alignment: Alignment.center,
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(fontSize: 16, color: Colors.white),
+              ),
+            );
+          },
           rangeHighlightBuilder: (context, day, isWithinRange) {
             return isWithinRange
                 ? Container(
-                    margin: const EdgeInsets.all(4),
                     decoration: BoxDecoration(color: Colors.grey.shade200),
                     alignment: Alignment.center,
                     child: Text(
