@@ -221,10 +221,25 @@ class ConventionCalendarState extends State<ConventionCalendar>
         calendarBuilders: CalendarBuilders(
           todayBuilder: (context, day, focusedDay) {
             return Container(
-              decoration: BoxDecoration(color: ColorConstants.blueIce),
+              decoration: BoxDecoration(color: Colors.grey.shade200),
               alignment: Alignment.center,
-              child: Text(day.day.toString()),
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(fontSize: 16, color: Colors.black),
+              ),
             );
+          },
+          rangeHighlightBuilder: (context, day, isWithinRange) {
+            return isWithinRange
+                ? Container(
+                    decoration: BoxDecoration(color: Colors.grey.shade200),
+                    alignment: Alignment.center,
+                    child: Text(
+                      day.day.toString(),
+                      style: const TextStyle(fontSize: 16, color: Colors.black),
+                    ),
+                  )
+                : null;
           },
           headerTitleBuilder: (context, date) => Row(
             children: [
