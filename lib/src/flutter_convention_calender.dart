@@ -105,9 +105,11 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   return isSameDay(widget.selectedDay ?? _selectedDay, day);
                 },
                 onDaySelected: (selectedDay, focusedDay) {
-                  widget.onDaySelected!(selectedDay, focusedDay);
-                  rangeStart = null;
-                  rangeEnd = null;
+                  setState(() {
+                    widget.onDaySelected!(selectedDay, focusedDay);
+                    rangeStart = null;
+                    rangeEnd = null;
+                  });
                   _updateFocusedDay();
                 },
                 pageJumpingEnabled: true,
