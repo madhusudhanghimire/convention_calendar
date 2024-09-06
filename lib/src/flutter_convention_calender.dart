@@ -263,7 +263,6 @@ class ConventionCalendarState extends State<ConventionCalendar>
                 ? Container(
                     decoration: BoxDecoration(
                       color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(8),
                     ),
                     alignment: Alignment.center,
                     child: Text(
