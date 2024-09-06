@@ -11,7 +11,7 @@ class ConventionCalendar extends StatefulWidget {
   final DateTime lastDay;
   final DateTime focusedDay;
   final DateTime? selectedDay;
-
+  final bool isRangeEnabled;
   final CalendarStyle? calendarStyle;
   final HeaderStyle? headerStyle;
   final CalendarBuilders? calendarBuilders;
@@ -26,6 +26,7 @@ class ConventionCalendar extends StatefulWidget {
     this.headerStyle,
     this.calendarStyle,
     this.calendarBuilders,
+    this.isRangeEnabled = false,
   });
 
   @override
@@ -107,7 +108,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
           widget.onDaySelected!(selectedDay, focusedDay);
           rangeStart = null;
           rangeEnd = null;
-          rangeSelectionMode = RangeSelectionMode.toggledOff;
+          rangeSelectionMode = widget.isRangeEnabled
+              ? RangeSelectionMode.enforced
+              : RangeSelectionMode.toggledOff;
           _updateFocusedDay();
         },
         pageJumpingEnabled: true,
@@ -137,7 +140,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
             _focusedDay = focusedDay;
             rangeStart = start;
             rangeEnd = end;
-            rangeSelectionMode = RangeSelectionMode.enforced;
+            widget.isRangeEnabled
+                ? RangeSelectionMode.enforced
+                : RangeSelectionMode.toggledOff;
           });
           _updateFocusedDay();
         },
