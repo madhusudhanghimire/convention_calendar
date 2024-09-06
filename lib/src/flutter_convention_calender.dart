@@ -137,7 +137,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
             _focusedDay = focusedDay;
             rangeStart = start;
             rangeEnd = end;
-            rangeSelectionMode = RangeSelectionMode.toggledOn;
+            rangeSelectionMode = RangeSelectionMode.enforced;
           });
           _updateFocusedDay();
         },
