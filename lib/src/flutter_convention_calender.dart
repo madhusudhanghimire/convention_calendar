@@ -178,11 +178,13 @@ class ConventionCalendarState extends State<ConventionCalendar>
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(8),
           ),
+          rangeHighlightColor: ColorConstants.blue,
           outsideDecoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(8)),
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(8),
+          ),
           withinRangeTextStyle: const TextStyle(
-              color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
           todayTextStyle: const TextStyle(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
           todayDecoration: BoxDecoration(
