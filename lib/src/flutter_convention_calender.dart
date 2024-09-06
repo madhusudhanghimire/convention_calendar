@@ -397,7 +397,14 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   style: TextButton.styleFrom(
                     foregroundColor: ColorConstants.blue,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    if (rangeStart != null && rangeEnd != null) {
+                      print(rangeStart);
+                      print(rangeEnd);
+                    } else {
+                      print(widget.selectedDay);
+                    }
+                  },
                   child: const Text('Select'),
                 ),
                 const SizedBox(
