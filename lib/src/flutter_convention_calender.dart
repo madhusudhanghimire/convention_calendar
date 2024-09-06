@@ -272,7 +272,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
             );
           },
           rangeHighlightBuilder: (context, day, isWithinRange) {
-            return isWithinRange && (day == rangeStart || day == rangeEnd)
+            return isWithinRange && !(day == rangeStart || day == rangeEnd)
                 ? Container(
                     decoration: BoxDecoration(
                       color: Colors.grey.shade200,
