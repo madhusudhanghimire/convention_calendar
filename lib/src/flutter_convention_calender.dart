@@ -219,6 +219,13 @@ class ConventionCalendarState extends State<ConventionCalendar>
               Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
         ),
         calendarBuilders: CalendarBuilders(
+          todayBuilder: (context, day, focusedDay) {
+            return Container(
+              decoration: BoxDecoration(color: ColorConstants.blueIce),
+              alignment: Alignment.center,
+              child: Text(day.day.toString()),
+            );
+          },
           headerTitleBuilder: (context, date) => Row(
             children: [
               Expanded(
