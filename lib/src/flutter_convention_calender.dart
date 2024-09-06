@@ -245,6 +245,19 @@ class ConventionCalendarState extends State<ConventionCalendar>
               ),
             );
           },
+          selectedBuilder: (context, day, focusedDay) {
+            return Container(
+              decoration: BoxDecoration(
+                color: ColorConstants.blue,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(fontSize: 16, color: Colors.white),
+              ),
+            );
+          },
           rangeEndBuilder: (context, day, focusedDay) {
             return Container(
               decoration: BoxDecoration(
