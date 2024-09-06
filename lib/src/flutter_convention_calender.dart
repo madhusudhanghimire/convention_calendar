@@ -109,9 +109,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                 },
                 onDaySelected: (selectedDay, focusedDay) {
                   setState(() {
-                    widget.isRangeEnabled == true
-                        ? null
-                        : widget.onDaySelected!(selectedDay, focusedDay);
+                    widget.onDaySelected!(selectedDay, focusedDay);
                     rangeStart = null;
                     rangeEnd = null;
                   });
@@ -264,18 +262,25 @@ class ConventionCalendarState extends State<ConventionCalendar>
                     );
                   },
                   selectedBuilder: (context, day, focusedDay) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: ColorConstants.blue,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        day.day.toString(),
-                        style:
-                            const TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    );
+                    return widget.isRangeEnabled == true
+                        ? null
+                        : Container(
+                            decoration: BoxDecoration(
+                              color: (widget.selectedDay)?.weekday ==
+                                          DateTime.saturday ||
+                                      (widget.selectedDay)?.weekday ==
+                                          DateTime.sunday
+                                  ? ColorConstants.error
+                                  : ColorConstants.blue,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              day.day.toString(),
+                              style: const TextStyle(
+                                  fontSize: 16, color: Colors.white),
+                            ),
+                          );
                   },
                   rangeEndBuilder: (context, day, focusedDay) {
                     return Container(
