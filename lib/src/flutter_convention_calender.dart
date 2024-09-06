@@ -222,7 +222,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
           todayBuilder: (context, day, focusedDay) {
             return Container(
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: (rangeStart == null || rangeEnd == null)
+                    ? Colors.grey.shade200
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(8),
               ),
               alignment: Alignment.center,
