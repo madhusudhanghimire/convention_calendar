@@ -5,25 +5,39 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../utils/app_colors.dart';
 
+// ignore: must_be_immutable
 class ConventionCalendar extends StatefulWidget {
   final Function(DateTime selectedDay, DateTime focusedDay)? onDaySelected;
   final DateTime firstDay;
   final DateTime lastDay;
   final DateTime focusedDay;
-  final dynamic selectedDay;
+  DateTime? selectedDay;
   final bool isRangeEnabled;
   final Color? rangeHighLightColor;
   final CalendarStyle? calendarStyle;
   final HeaderStyle? headerStyle;
   final CalendarBuilders? calendarBuilders;
 
-  const ConventionCalendar({
+  ConventionCalendar({
     super.key,
     required this.onDaySelected,
     required this.firstDay,
     required this.lastDay,
     required this.focusedDay,
     this.selectedDay,
+    this.headerStyle,
+    this.calendarStyle,
+    this.calendarBuilders,
+    this.isRangeEnabled = false,
+    this.rangeHighLightColor,
+  });
+
+  ConventionCalendar.rangeSelection({
+    super.key,
+    required this.onDaySelected,
+    required this.firstDay,
+    required this.lastDay,
+    required this.focusedDay,
     this.headerStyle,
     this.calendarStyle,
     this.calendarBuilders,
