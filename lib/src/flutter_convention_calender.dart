@@ -176,7 +176,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(8),
           ),
-          rangeHighlightColor: ColorConstants.blueJelly,
+          rangeHighlightColor: ColorConstants.blueFontain,
           outsideDecoration: BoxDecoration(
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(8),
