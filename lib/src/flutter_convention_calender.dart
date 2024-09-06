@@ -262,10 +262,10 @@ class ConventionCalendarState extends State<ConventionCalendar>
                     );
                   },
                   selectedBuilder: (context, day, focusedDay) {
-                    return widget.isRangeEnabled == true
-                        ? null
-                        : Container(
-                            decoration: BoxDecoration(
+                    return Container(
+                      decoration: widget.isRangeEnabled == true
+                          ? null
+                          : BoxDecoration(
                               color: (widget.selectedDay)?.weekday ==
                                           DateTime.saturday ||
                                       (widget.selectedDay)?.weekday ==
@@ -274,13 +274,13 @@ class ConventionCalendarState extends State<ConventionCalendar>
                                   : ColorConstants.blue,
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              day.day.toString(),
-                              style: const TextStyle(
-                                  fontSize: 16, color: Colors.white),
-                            ),
-                          );
+                      alignment: Alignment.center,
+                      child: Text(
+                        day.day.toString(),
+                        style:
+                            const TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                    );
                   },
                   rangeEndBuilder: (context, day, focusedDay) {
                     return Container(
