@@ -73,6 +73,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
   DateTime? _selectedDay = DateTime.now();
   String? selectedMonth;
 
+  DateTime? rangeStart;
+  DateTime? rangeEnd;
+
   String? selectedYear;
 
   @override
@@ -83,6 +86,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
     selectedYear = now.year.toString();
   }
 
+  RangeSelectionMode rangeSelectionMode = RangeSelectionMode.toggledOff;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -113,7 +117,14 @@ class ConventionCalendarState extends State<ConventionCalendar>
             _updateFocusedDay();
           });
         },
-        rangeSelectionMode: RangeSelectionMode.toggledOn,
+        rangeSelectionMode: rangeSelectionMode,
+        onRangeSelected: (start, end, focusedDay) {
+          setState(() {
+            rangeStart = start;
+            rangeEnd = end;
+            rangeSelectionMode = RangeSelectionMode.toggledOn;
+          });
+        },
         calendarStyle: CalendarStyle(
           defaultTextStyle: const TextStyle(
             fontSize: 16,
