@@ -221,7 +221,10 @@ class ConventionCalendarState extends State<ConventionCalendar>
         calendarBuilders: CalendarBuilders(
           todayBuilder: (context, day, focusedDay) {
             return Container(
-              decoration: BoxDecoration(color: Colors.grey.shade200),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(8),
+              ),
               alignment: Alignment.center,
               child: Text(
                 day.day.toString(),
@@ -231,7 +234,10 @@ class ConventionCalendarState extends State<ConventionCalendar>
           },
           rangeStartBuilder: (context, day, focusedDay) {
             return Container(
-              decoration: BoxDecoration(color: ColorConstants.blue),
+              decoration: BoxDecoration(
+                color: ColorConstants.blue,
+                borderRadius: BorderRadius.circular(8),
+              ),
               alignment: Alignment.center,
               child: Text(
                 day.day.toString(),
@@ -241,7 +247,10 @@ class ConventionCalendarState extends State<ConventionCalendar>
           },
           rangeEndBuilder: (context, day, focusedDay) {
             return Container(
-              decoration: BoxDecoration(color: ColorConstants.blue),
+              decoration: BoxDecoration(
+                color: ColorConstants.blue,
+                borderRadius: BorderRadius.circular(8),
+              ),
               alignment: Alignment.center,
               child: Text(
                 day.day.toString(),
@@ -252,7 +261,10 @@ class ConventionCalendarState extends State<ConventionCalendar>
           rangeHighlightBuilder: (context, day, isWithinRange) {
             return isWithinRange
                 ? Container(
-                    decoration: BoxDecoration(color: Colors.grey.shade200),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     alignment: Alignment.center,
                     child: Text(
                       day.day.toString(),
