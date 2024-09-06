@@ -221,6 +221,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
         calendarBuilders: CalendarBuilders(
           todayBuilder: (context, day, focusedDay) {
             return Container(
+              margin: const EdgeInsets.all(4),
               decoration: BoxDecoration(color: Colors.grey.shade200),
               alignment: Alignment.center,
               child: Text(
@@ -232,6 +233,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
           rangeHighlightBuilder: (context, day, isWithinRange) {
             return isWithinRange
                 ? Container(
+                    margin: const EdgeInsets.all(4),
                     decoration: BoxDecoration(color: Colors.grey.shade200),
                     alignment: Alignment.center,
                     child: Text(
