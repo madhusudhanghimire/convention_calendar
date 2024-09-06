@@ -19,4 +19,8 @@ class ColorConstants {
   static Color blueFontain = getColor('50a6c3');
   static Color blueGlory = getColor('91c8d9');
   static Color blueIce = getColor('c8e1ea');
+  static Color blueAzure = getColor("2e5ba3");
+  static Color steelBlue = getColor('5a8ebf');
+  static Color bluePigeon = getColor('a3c4d7');
+  static Color desertStrom = getColor('f3f3f1');
 }
