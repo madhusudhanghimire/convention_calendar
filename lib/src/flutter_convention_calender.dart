@@ -170,6 +170,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
             borderRadius: BorderRadius.circular(8),
             shape: BoxShape.rectangle,
           ),
+          isTodayHighlighted: true,
           weekendDecoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             shape: BoxShape.rectangle,
@@ -187,11 +188,12 @@ class ConventionCalendarState extends State<ConventionCalendar>
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
           todayTextStyle: const TextStyle(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
-          todayDecoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              // border: Border.all(color: ColorConstants.blue, width: 2),
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(8)),
+          // todayDecoration: BoxDecoration(
+          //     color: Colors.grey.shade200,
+
+          //     // border: Border.all(color: ColorConstants.blue, width: 2),
+          //     shape: BoxShape.rectangle,
+          //     borderRadius: BorderRadius.circular(8)),
           selectedDecoration: BoxDecoration(
             color: (widget.selectedDay)?.weekday == DateTime.saturday ||
                     (widget.selectedDay)?.weekday == DateTime.sunday
