@@ -5,20 +5,19 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../utils/app_colors.dart';
 
-// ignore: must_be_immutable
 class ConventionCalendar extends StatefulWidget {
   final Function(DateTime selectedDay, DateTime focusedDay)? onDaySelected;
   final DateTime firstDay;
   final DateTime lastDay;
   final DateTime focusedDay;
-  DateTime? selectedDay;
+  final dynamic selectedDay;
   final bool isRangeEnabled;
   final Color? rangeHighLightColor;
   final CalendarStyle? calendarStyle;
   final HeaderStyle? headerStyle;
   final CalendarBuilders? calendarBuilders;
 
-  ConventionCalendar({
+  const ConventionCalendar({
     super.key,
     required this.onDaySelected,
     required this.firstDay,
@@ -80,9 +79,6 @@ class ConventionCalendarState extends State<ConventionCalendar>
     selectedMonth = DateFormat('MMMM').format(now);
     selectedYear = now.year.toString();
     years = _generateYears(widget.firstDay, widget.lastDay);
-    if (widget.isRangeEnabled) {
-      widget.selectedDay = null;
-    }
   }
 
   @override
@@ -387,11 +383,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   style: TextButton.styleFrom(
                     foregroundColor: ColorConstants.blue,
                   ),
-                  onPressed: () {
-                    print(rangeStart);
-                    print(rangeEnd);
-                    print(widget.selectedDay);
-                  },
+                  onPressed: () {},
                   child: const Text('Select'),
                 ),
                 const SizedBox(
