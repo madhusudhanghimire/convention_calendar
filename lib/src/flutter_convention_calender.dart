@@ -34,6 +34,7 @@ class ConventionCalendar extends StatefulWidget {
 
 class ConventionCalendarState extends State<ConventionCalendar>
     with SingleTickerProviderStateMixin {
+  CalendarFormat calendarFormat = CalendarFormat.month;
   List<String> months = [
     "January",
     "February",
@@ -120,6 +121,13 @@ class ConventionCalendarState extends State<ConventionCalendar>
 
             _updateFocusedDay();
           });
+        },
+        onFormatChanged: (format) {
+          if (calendarFormat != format) {
+            setState(() {
+              calendarFormat = format;
+            });
+          }
         },
         rangeSelectionMode: rangeSelectionMode,
         onRangeSelected: (start, end, focusedDay) {
