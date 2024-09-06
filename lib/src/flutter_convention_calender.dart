@@ -84,6 +84,8 @@ class ConventionCalendarState extends State<ConventionCalendar>
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      insetAnimationCurve: Curves.bounceIn,
+      insetAnimationDuration: const Duration(milliseconds: 300),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       backgroundColor: Colors.white,
       insetPadding: const EdgeInsets.symmetric(horizontal: 12),
