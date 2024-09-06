@@ -283,7 +283,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       style: const TextStyle(fontSize: 16, color: Colors.black),
                     ),
                   )
-                : null;
+                : const SizedBox();
           },
           headerTitleBuilder: (context, date) => Row(
             children: [
