@@ -224,7 +224,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
               decoration: BoxDecoration(
                 color: (rangeStart == null || rangeEnd == null)
                     ? Colors.grey.shade200
-                    : Colors.white,
+                    : null,
                 borderRadius: BorderRadius.circular(8),
               ),
               alignment: Alignment.center,
