@@ -267,7 +267,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                     return holiday != null
                         ? Tooltip(
                             decoration: BoxDecoration(
-                              color: ColorConstants.error.withOpacity(0.6),
+                              color: ColorConstants.error.withOpacity(0.8),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             textStyle: const  TextStyle(color: Colors.white),
