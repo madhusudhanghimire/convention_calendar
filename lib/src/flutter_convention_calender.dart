@@ -16,20 +16,21 @@ class ConventionCalendar extends StatefulWidget {
   final CalendarStyle? calendarStyle;
   final HeaderStyle? headerStyle;
   final CalendarBuilders? calendarBuilders;
+  final List<DateTime?>? holiday;
 
-  const ConventionCalendar({
-    super.key,
-    required this.onDaySelected,
-    required this.firstDay,
-    required this.lastDay,
-    required this.focusedDay,
-    this.selectedDay,
-    this.headerStyle,
-    this.calendarStyle,
-    this.calendarBuilders,
-    this.isRangeEnabled = false,
-    this.rangeHighLightColor,
-  });
+  const ConventionCalendar(
+      {super.key,
+      required this.onDaySelected,
+      required this.firstDay,
+      required this.lastDay,
+      required this.focusedDay,
+      this.selectedDay,
+      this.headerStyle,
+      this.calendarStyle,
+      this.calendarBuilders,
+      this.isRangeEnabled = false,
+      this.rangeHighLightColor,
+      this.holiday});
 
   @override
   ConventionCalendarState createState() => ConventionCalendarState();
@@ -218,7 +219,22 @@ class ConventionCalendarState extends State<ConventionCalendar>
           rightChevronIcon:
               Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
         ),
+        holidayPredicate: (day) => widget.holiday!.contains(day),
         calendarBuilders: CalendarBuilders(
+          holidayBuilder: (context, day, focusedDay) => Tooltip(
+            message: 'Holiday',
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.red.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(fontSize: 16, color: Colors.black),
+              ),
+            ),
+          ),
           todayBuilder: (context, day, focusedDay) {
             return Container(
               decoration: BoxDecoration(
@@ -272,9 +288,8 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   )
                 : null;
           },
-          
           defaultBuilder: (context, day, focusedDay) {
-                return Container(
+            return Container(
               // decoration: BoxDecoration(
               //   // color: ColorConstants.blue,
               //   // borderRadius: BorderRadius.circular(8),
@@ -283,7 +298,6 @@ class ConventionCalendarState extends State<ConventionCalendar>
               child: Text(
                 day.day.toString(),
                 style: const TextStyle(fontSize: 16, color: Colors.black),
-
               ),
             );
           },
