@@ -133,9 +133,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                         i.month == day.month &&
                         i.day == day.day) {
                       return true;
-                    } else {
-                      return false;
-                    }
+                    } 
                   }
                   return false;
                 },
