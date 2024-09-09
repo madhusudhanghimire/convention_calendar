@@ -305,7 +305,14 @@ class ConventionCalendarState extends State<ConventionCalendar>
                         color: day.weekday == DateTime.saturday ||
                                 day.weekday == DateTime.sunday
                             ? ColorConstants.error
-                            : ColorConstants.blue,
+                            : (widget.holidays ?? [])
+                                    .map((holiday) =>
+                                        holiday.year == day.year &&
+                                        holiday.month == day.month &&
+                                        holiday.day == day.day)
+                                    .any((match) => match)
+                                ? ColorConstants.error
+                                : ColorConstants.blue,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       alignment: Alignment.center,
@@ -346,7 +353,14 @@ class ConventionCalendarState extends State<ConventionCalendar>
                         color: day.weekday == DateTime.saturday ||
                                 day.weekday == DateTime.sunday
                             ? ColorConstants.error
-                            : ColorConstants.blue,
+                            : (widget.holidays ?? [])
+                                    .map((holiday) =>
+                                        holiday.year == day.year &&
+                                        holiday.month == day.month &&
+                                        holiday.day == day.day)
+                                    .any((match) => match)
+                                ? ColorConstants.error
+                                : ColorConstants.blue,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       alignment: Alignment.center,
