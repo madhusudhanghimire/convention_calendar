@@ -269,12 +269,14 @@ class ConventionCalendarState extends State<ConventionCalendar>
                               height: 4,
                             ),
                             Expanded(
-                              child: Text(
-                                day.day.toString(),
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: ColorConstants.error,
+                              child: Center(
+                                child: Text(
+                                  day.day.toString(),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: ColorConstants.error,
+                                  ),
                                 ),
                               ),
                             ),
