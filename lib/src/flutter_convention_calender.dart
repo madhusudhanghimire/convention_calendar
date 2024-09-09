@@ -306,14 +306,20 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       ),
                     );
                   },
-                  
                   selectedBuilder: (context, day, focusedDay) {
                     return Container(
                       decoration: BoxDecoration(
                         color: _selectedDay?.weekday == DateTime.saturday ||
                                 _selectedDay?.weekday == DateTime.sunday
                             ? ColorConstants.error
-                            : ColorConstants.blue,
+                            : (widget.holidays ?? [])
+                                    .map((holiday) =>
+                                        holiday.year == day.year &&
+                                        holiday.month == day.month &&
+                                        holiday.day == day.day)
+                                    .any((match) => match)
+                                ? ColorConstants.error
+                                : ColorConstants.blue,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       alignment: Alignment.center,
@@ -346,13 +352,18 @@ class ConventionCalendarState extends State<ConventionCalendar>
                             !(day == rangeStart || day == rangeEnd)
                         ? Container(
                             decoration: BoxDecoration(
-                              color : Colors.grey.shade200,
+                              color: Colors.grey.shade200,
                             ),
                             alignment: Alignment.center,
                             child: Text(
                               day.day.toString(),
-                              style: const TextStyle(
-                                  fontSize: 16, color: Colors.black),
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: day.weekday == DateTime.saturday ||
+                                        day.weekday == DateTime.sunday
+                                    ? ColorConstants.error
+                                    : Colors.black,
+                              ),
                             ),
                           )
                         : const SizedBox();
