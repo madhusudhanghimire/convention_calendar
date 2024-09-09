@@ -133,7 +133,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                         i.month == day.month &&
                         i.day == day.day) {
                       return true;
-                    } 
+                    }
                   }
                   return false;
                 },
@@ -271,14 +271,21 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       message: "Some Holidays Message",
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.red.shade300,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         alignment: Alignment.center,
-                        child: Text(
-                          day.day.toString(),
-                          style: const TextStyle(
-                              fontSize: 16, color: Colors.black),
+                        child: Column(
+                          children: [
+                            Text(
+                              day.day.toString(),
+                              style: TextStyle(
+                                  fontSize: 16, color: ColorConstants.error),
+                            ),
+                            CircleAvatar(
+                              backgroundColor: ColorConstants.error,
+                              radius: 1,
+                            )
+                          ],
                         ),
                       ),
                     );
