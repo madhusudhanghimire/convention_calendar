@@ -255,25 +255,35 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       color: Colors.black),
                 ),
                 calendarBuilders: CalendarBuilders(
-                  holidayBuilder: (context, day, focusedDay) {
-                    return Tooltip(
-                      message: "Some Holidays Message",
-                      child: Container(
-                                        margin: const EdgeInsets.symmetric(vertical: 4),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          day.day.toString(),
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: ColorConstants.error,
-                          ),
-                        ),
-                      ),
+                 holidayBuilder: (context, day, focusedDay) {
+                    final holiday = widget.holidays?.firstWhere(
+                      (holiday) =>
+                        holiday.dateTime?.year == day.year &&
+                        holiday.dateTime?.month == day.month &&
+                        holiday.dateTime?.day == day.day,
+                      orElse: () => HolidayModel(),
                     );
+
+                    return holiday != null
+                      ? Tooltip(
+                          message: holiday.description ?? 'No description',
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 4),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              day.day.toString(),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: ColorConstants.error,
+                              ),
+                            ),
+                          ),
+                        )
+                      : const  SizedBox.shrink();
                   },
                   todayBuilder: (context, day, focusedDay) {
                     return Container(
