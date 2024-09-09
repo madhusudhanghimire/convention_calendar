@@ -128,9 +128,16 @@ class ConventionCalendarState extends State<ConventionCalendar>
                 lastDay: widget.lastDay,
                 focusedDay: _focusedDay,
                 holidayPredicate: (day) {
-                  print(widget.holidays);
-                  print(day.toUtc());
-                  return widget.holidays?.contains(day.toUtc()) ?? false;
+                  for (DateTime i in widget.holidays ?? []) {
+                    if (i.year == day.year &&
+                        i.month == day.month &&
+                        i.day == day.day) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  }
+                  return false;
                 },
                 selectedDayPredicate: (day) {
                   return isSameDay(_selectedDay, day);
@@ -265,7 +272,6 @@ class ConventionCalendarState extends State<ConventionCalendar>
                     return Tooltip(
                       message: "Some Holidays Message",
                       child: Container(
-                        
                         decoration: BoxDecoration(
                           color: Colors.red.shade300,
                           borderRadius: BorderRadius.circular(8),
@@ -273,8 +279,8 @@ class ConventionCalendarState extends State<ConventionCalendar>
                         alignment: Alignment.center,
                         child: Text(
                           day.day.toString(),
-                          style:
-                              const TextStyle(fontSize: 16, color: Colors.black),
+                          style: const TextStyle(
+                              fontSize: 16, color: Colors.black),
                         ),
                       ),
                     );
