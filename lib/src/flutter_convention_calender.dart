@@ -128,6 +128,8 @@ class ConventionCalendarState extends State<ConventionCalendar>
                 lastDay: widget.lastDay,
                 focusedDay: _focusedDay,
                 holidayPredicate: (day) {
+                  print(widget.holidays);
+                  print(day);
                   return widget.holidays?.contains(day) ?? false;
                 },
                 selectedDayPredicate: (day) {
