@@ -284,8 +284,18 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       alignment: Alignment.center,
                       child: Text(
                         day.day.toString(),
-                        style:
-                            const TextStyle(fontSize: 16, color: Colors.black),
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: (widget.holidays ?? [])
+                                  .map((holiday) =>
+                                      holiday.year == day.year &&
+                                      holiday.month == day.month &&
+                                      holiday.day == day.day)
+                                  .any((match) => match)
+                              ? ColorConstants.error
+                              : Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     );
                   },
@@ -348,7 +358,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                     );
                   },
                   withinRangeBuilder: (context, day, focusedDay) {
-                   return  Container(
+                    return Container(
                       decoration: BoxDecoration(
                         color: Colors.grey.shade200,
                       ),
@@ -357,6 +367,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                         day.day.toString(),
                         style: TextStyle(
                           fontSize: 16,
+                          fontWeight: FontWeight.w500,
                           color: day.weekday == DateTime.saturday ||
                                   day.weekday == DateTime.sunday
                               ? ColorConstants.error
