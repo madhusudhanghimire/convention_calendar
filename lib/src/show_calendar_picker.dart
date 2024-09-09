@@ -5,7 +5,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 class ConventionCalendarPicker  {
 
-Future<DateTime?> showConventionCalendarPicker({
+ static Future<DateTime?> showConventionCalendarPicker({
   required BuildContext context,
   required DateTime firstday,
   required DateTime lastDay,
@@ -34,7 +34,7 @@ Future<DateTime?> showConventionCalendarPicker({
   );
 }
 
-Future<DateTime?> showConventionCalendarRangePicker({
+static  Future<DateTime?> showConventionCalendarRangePicker({
   required BuildContext context,
   required DateTime firstday,
   required DateTime lastDay,
