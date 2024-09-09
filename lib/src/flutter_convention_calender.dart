@@ -5,50 +5,6 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../utils/app_colors.dart';
 
-Future<DateTime?> showConventionCalendarPicker({
-  required BuildContext context,
-  required DateTime firstday,
-  required DateTime lastDay,
-  // Function(DateTime selectedDay, DateTime focusedDay)? onDaySelected,
-  required DateTime focusedDay,
-  required bool isRangeEnabled,
-  Color? rangeHighLightColor,
-  CalendarStyle? calendarStyle,
-  HeaderStyle? headerStyle,
-  CalendarBuilders? calendarBuilders,
-  List<DateTime>? holidays,
-}) async {
-  return showDialog<DateTime?>(
-    context: context,
-    builder: (context) {
-      return isRangeEnabled == false
-          ? ConventionCalendar(
-              // onDaySelected: onDaySelected,
-              firstDay: firstday,
-              lastDay: lastDay,
-              focusedDay: focusedDay,
-              calendarStyle: calendarStyle,
-              isRangeEnabled: isRangeEnabled,
-              headerStyle: headerStyle,
-              calendarBuilders: calendarBuilders,
-              rangeHighLightColor: rangeHighLightColor,
-              holidays: holidays,
-            )
-          : ConventionCalendar.rangeSelection(
-              // onDaySelected: onDaySelected,
-              firstDay: firstday,
-              lastDay: lastDay,
-              focusedDay: focusedDay,
-              isRangeEnabled: isRangeEnabled,
-              calendarStyle: calendarStyle,
-              headerStyle: headerStyle,
-              calendarBuilders: calendarBuilders,
-              rangeHighLightColor: rangeHighLightColor,
-              holidays: holidays,
-            );
-    },
-  );
-}
 
 class ConventionCalendar extends StatefulWidget {
   // final Function(DateTime selectedDay, DateTime focusedDay)? onDaySelected;
