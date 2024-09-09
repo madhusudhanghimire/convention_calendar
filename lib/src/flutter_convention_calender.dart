@@ -258,6 +258,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                     return Tooltip(
                       message: "Some Holidays Message",
                       child: Container(
+                                        margin: const EdgeInsets.symmetric(vertical: 4),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -275,6 +276,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   },
                   todayBuilder: (context, day, focusedDay) {
                     return Container(
+                                      margin: const EdgeInsets.symmetric(vertical: 4),
                       decoration: BoxDecoration(
                         color: (rangeStart == null || rangeEnd == null)
                             ? Colors.grey.shade200
@@ -301,6 +303,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   },
                   rangeStartBuilder: (context, day, focusedDay) {
                     return Container(
+                                      margin: const EdgeInsets.symmetric(vertical: 4),
                       decoration: BoxDecoration(
                         color: day.weekday == DateTime.saturday ||
                                 day.weekday == DateTime.sunday
@@ -325,6 +328,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   },
                   selectedBuilder: (context, day, focusedDay) {
                     return Container(
+                                      margin: const EdgeInsets.symmetric(vertical: 4),
                       decoration: BoxDecoration(
                         color: _selectedDay?.weekday == DateTime.saturday ||
                                 _selectedDay?.weekday == DateTime.sunday
@@ -349,6 +353,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   },
                   rangeEndBuilder: (context, day, focusedDay) {
                     return Container(
+                      margin: const EdgeInsets.symmetric(vertical: 4),
                       decoration: BoxDecoration(
                         color: day.weekday == DateTime.saturday ||
                                 day.weekday == DateTime.sunday
@@ -373,6 +378,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   },
                   withinRangeBuilder: (context, day, focusedDay) {
                     return Container(
+                                      margin: const EdgeInsets.symmetric(vertical: 4),
                       decoration: BoxDecoration(
                         color: Colors.grey.shade200,
                       ),
@@ -394,6 +400,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                     return isWithinRange &&
                             !(day == rangeStart || day == rangeEnd)
                         ? Container(
+                                          margin: const EdgeInsets.symmetric(vertical: 4),
                             decoration: BoxDecoration(
                               color: Colors.grey.shade200,
                             ),
