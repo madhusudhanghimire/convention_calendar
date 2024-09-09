@@ -28,7 +28,6 @@ Future<DateTime?> showConventionCalendarPicker({
               firstDay: firstday,
               lastDay: lastDay,
               focusedDay: focusedDay,
-              selectedDay: selectedDay,
               calendarStyle: calendarStyle,
               isRangeEnabled: isRangeEnabled,
               headerStyle: headerStyle,
@@ -52,13 +51,12 @@ Future<DateTime?> showConventionCalendarPicker({
   );
 }
 
-// ignore: must_be_immutable
 class ConventionCalendar extends StatefulWidget {
   final Function(DateTime selectedDay, DateTime focusedDay)? onDaySelected;
   final DateTime firstDay;
   final DateTime lastDay;
   final DateTime focusedDay;
-  DateTime? selectedDay;
+
   final bool isRangeEnabled;
   final Color? rangeHighLightColor;
   final CalendarStyle? calendarStyle;
@@ -66,13 +64,12 @@ class ConventionCalendar extends StatefulWidget {
   final CalendarBuilders? calendarBuilders;
   final List<DateTime>? holidays;
 
-  ConventionCalendar({
+  const ConventionCalendar({
     super.key,
     required this.onDaySelected,
     required this.firstDay,
     required this.lastDay,
     required this.focusedDay,
-    this.selectedDay,
     this.headerStyle,
     this.calendarStyle,
     this.calendarBuilders,
@@ -81,7 +78,7 @@ class ConventionCalendar extends StatefulWidget {
     this.holidays,
   });
 
-  ConventionCalendar.rangeSelection({
+  const ConventionCalendar.rangeSelection({
     super.key,
     required this.onDaySelected,
     required this.firstDay,
@@ -128,7 +125,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
   }
 
   DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay = DateTime.now();
+  DateTime? _selectedDay;
   String? selectedMonth;
 
   DateTime? rangeStart;
@@ -169,7 +166,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                 lastDay: widget.lastDay,
                 focusedDay: _focusedDay,
                 selectedDayPredicate: (day) {
-                  return isSameDay(widget.selectedDay ?? _selectedDay, day);
+                  return isSameDay(_selectedDay, day);
                 },
                 onDaySelected: (selectedDay, focusedDay) {
                   setState(() {
@@ -267,8 +264,8 @@ class ConventionCalendarState extends State<ConventionCalendar>
                     borderRadius: BorderRadius.circular(100),
                   ),
                   selectedDecoration: BoxDecoration(
-                    color: (widget.selectedDay)?.weekday == DateTime.saturday ||
-                            (widget.selectedDay)?.weekday == DateTime.sunday
+                    color: _selectedDay?.weekday == DateTime.saturday ||
+                            _selectedDay?.weekday == DateTime.sunday
                         ? ColorConstants.error
                         : ColorConstants.blue,
                     borderRadius: BorderRadius.circular(8),
@@ -447,14 +444,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   style: TextButton.styleFrom(
                     foregroundColor: ColorConstants.blue,
                   ),
-                  onPressed: () {
-                    if (rangeStart != null && rangeEnd != null) {
-                      print(rangeStart);
-                      print(rangeEnd);
-                    } else {
-                      print(widget.selectedDay);
-                    }
-                  },
+                  onPressed: () {},
                   child: const Text('Select'),
                 ),
                 const SizedBox(
