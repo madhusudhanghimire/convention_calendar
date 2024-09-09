@@ -127,6 +127,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
                 firstDay: widget.firstDay,
                 lastDay: widget.lastDay,
                 focusedDay: _focusedDay,
+                holidayPredicate: (day) {
+                  return widget.holidays?.contains(day) ?? false;
+                },
                 selectedDayPredicate: (day) {
                   return isSameDay(_selectedDay, day);
                 },
@@ -256,6 +259,24 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       color: Colors.black),
                 ),
                 calendarBuilders: CalendarBuilders(
+                  holidayBuilder: (context, day, focusedDay) {
+                    return Tooltip(
+                      message: "Some Holidays Message",
+                      child: Container(
+                        
+                        decoration: BoxDecoration(
+                          color: Colors.red.shade300,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          day.day.toString(),
+                          style:
+                              const TextStyle(fontSize: 16, color: Colors.black),
+                        ),
+                      ),
+                    );
+                  },
                   todayBuilder: (context, day, focusedDay) {
                     return Container(
                       decoration: BoxDecoration(
@@ -410,9 +431,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   ),
                   onPressed: () {
                     if (widget.isRangeEnabled == true) {
-                      widget.onRangeSelected!(rangeStart,rangeEnd);
+                      widget.onRangeSelected!(rangeStart, rangeEnd);
                       Navigator.of(context).pop();
-                    }else{
+                    } else {
                       widget.onDateSelected!(_selectedDay);
                       Navigator.of(context).pop();
                     }
