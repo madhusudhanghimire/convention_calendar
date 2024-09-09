@@ -347,6 +347,24 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       ),
                     );
                   },
+                  withinRangeBuilder: (context, day, focusedDay) {
+                   return  Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        day.day.toString(),
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: day.weekday == DateTime.saturday ||
+                                  day.weekday == DateTime.sunday
+                              ? ColorConstants.error
+                              : Colors.black,
+                        ),
+                      ),
+                    );
+                  },
                   rangeHighlightBuilder: (context, day, isWithinRange) {
                     return isWithinRange &&
                             !(day == rangeStart || day == rangeEnd)
