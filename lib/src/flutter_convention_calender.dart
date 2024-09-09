@@ -9,7 +9,7 @@ Future<DateTime?> showConventionCalendarPicker({
   required BuildContext context,
   required DateTime firstday,
   required DateTime lastDay,
-  Function(DateTime selectedDay, DateTime focusedDay)? onDaySelected,
+  // Function(DateTime selectedDay, DateTime focusedDay)? onDaySelected,
   required DateTime focusedDay,
   required bool isRangeEnabled,
   Color? rangeHighLightColor,
@@ -23,7 +23,7 @@ Future<DateTime?> showConventionCalendarPicker({
     builder: (context) {
       return isRangeEnabled == false
           ? ConventionCalendar(
-              onDaySelected: onDaySelected,
+              // onDaySelected: onDaySelected,
               firstDay: firstday,
               lastDay: lastDay,
               focusedDay: focusedDay,
@@ -35,7 +35,7 @@ Future<DateTime?> showConventionCalendarPicker({
               holidays: holidays,
             )
           : ConventionCalendar.rangeSelection(
-              onDaySelected: onDaySelected,
+              // onDaySelected: onDaySelected,
               firstDay: firstday,
               lastDay: lastDay,
               focusedDay: focusedDay,
@@ -51,7 +51,7 @@ Future<DateTime?> showConventionCalendarPicker({
 }
 
 class ConventionCalendar extends StatefulWidget {
-  final Function(DateTime selectedDay, DateTime focusedDay)? onDaySelected;
+  // final Function(DateTime selectedDay, DateTime focusedDay)? onDaySelected;
   final DateTime firstDay;
   final DateTime lastDay;
   final DateTime focusedDay;
@@ -65,7 +65,7 @@ class ConventionCalendar extends StatefulWidget {
 
   const ConventionCalendar({
     super.key,
-    required this.onDaySelected,
+    // required this.onDaySelected,
     required this.firstDay,
     required this.lastDay,
     required this.focusedDay,
@@ -79,7 +79,7 @@ class ConventionCalendar extends StatefulWidget {
 
   const ConventionCalendar.rangeSelection({
     super.key,
-    required this.onDaySelected,
+    // required this.onDaySelected,
     required this.firstDay,
     required this.lastDay,
     required this.focusedDay,
@@ -169,7 +169,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
                 },
                 onDaySelected: (selectedDay, focusedDay) {
                   setState(() {
-                    widget.onDaySelected!(selectedDay, focusedDay);
+                    _selectedDay = selectedDay;
+                    _focusedDay = focusedDay;
+                    // widget.onDaySelected!(selectedDay, focusedDay);
                     rangeStart = null;
                     rangeEnd = null;
                   });
