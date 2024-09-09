@@ -271,7 +271,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                               borderRadius: BorderRadius.circular(8),
                             ),
                             textStyle: const TextStyle(color: Colors.white),
-                            message: holiday.description != null ||
+                            message: holiday.description != null &&
                                     holiday.description!.isNotEmpty
                                 ? holiday.description
                                 : 'No description',
