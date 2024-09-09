@@ -23,31 +23,40 @@ Future<DateTime?> showConventionCalendarPicker({
     context: context,
     builder: (context) {
       return isRangeEnabled == true
-          ? ConventionCalendar(
-              onDaySelected: onDaySelected,
-              firstDay: firstday,
-              lastDay: lastDay,
-              focusedDay: focusedDay,
-              selectedDay: selectedDay,
-              calendarStyle: calendarStyle,
-              isRangeEnabled: isRangeEnabled,
-              headerStyle: headerStyle,
-              calendarBuilders: calendarBuilders,
-              rangeHighLightColor: rangeHighLightColor,
-              holidays: holidays,
-            )
-          : ConventionCalendar.rangeSelection(
-              onDaySelected: onDaySelected,
-              firstDay: firstday,
-              lastDay: lastDay,
-              focusedDay: focusedDay,
-              isRangeEnabled: isRangeEnabled,
-              calendarStyle: calendarStyle,
-              headerStyle: headerStyle,
-              calendarBuilders: calendarBuilders,
-              rangeHighLightColor: rangeHighLightColor,
-              holidays: holidays,
-            );
+          ? StatefulBuilder(
+            builder: (context, setState) {
+              return ConventionCalendar(
+                  onDaySelected: onDaySelected,
+                  firstDay: firstday,
+                  lastDay: lastDay,
+                  focusedDay: focusedDay,
+                  selectedDay: selectedDay,
+                  calendarStyle: calendarStyle,
+                  isRangeEnabled: isRangeEnabled,
+                  headerStyle: headerStyle,
+                  calendarBuilders: calendarBuilders,
+                  rangeHighLightColor: rangeHighLightColor,
+                  holidays: holidays,
+                );
+            }
+          )
+          :StatefulBuilder(
+            builder: (context, setState) {
+              return ConventionCalendar.rangeSelection(
+                  onDaySelected: onDaySelected,
+                  firstDay: firstday,
+                  lastDay: lastDay,
+                  focusedDay: focusedDay,
+               
+                  calendarStyle: calendarStyle,
+                  isRangeEnabled: isRangeEnabled,
+                  headerStyle: headerStyle,
+                  calendarBuilders: calendarBuilders,
+                  rangeHighLightColor: rangeHighLightColor,
+                  holidays: holidays,
+                );
+            }
+          );
     },
   );
 }
