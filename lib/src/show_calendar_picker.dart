@@ -9,6 +9,7 @@ class ConventionCalendarPicker {
     required DateTime lastDay,
     required DateTime focusedDay,
     Color? rangeHighLightColor,
+    Function(DateTime? date)? onDateSelected,
     CalendarStyle? calendarStyle,
     HeaderStyle? headerStyle,
     CalendarBuilders? calendarBuilders,
@@ -19,6 +20,7 @@ class ConventionCalendarPicker {
       builder: (context) {
         return ConventionCalendar(
           firstDay: firstday,
+          onDateSelected: onDateSelected,
           lastDay: lastDay,
           focusedDay: focusedDay,
           calendarStyle: calendarStyle,
@@ -36,6 +38,7 @@ class ConventionCalendarPicker {
     required BuildContext context,
     required DateTime firstday,
     required DateTime lastDay,
+    Function(DateTime? rangeStart, DateTime? rangeEnd)? onRangeSelected,
     required DateTime focusedDay,
     Color? rangeHighLightColor,
     CalendarStyle? calendarStyle,
@@ -53,6 +56,7 @@ class ConventionCalendarPicker {
           isRangeEnabled: true,
           calendarStyle: calendarStyle,
           headerStyle: headerStyle,
+          onRangeSelected: onRangeSelected,
           calendarBuilders: calendarBuilders,
           rangeHighLightColor: rangeHighLightColor,
           holidays: holidays,

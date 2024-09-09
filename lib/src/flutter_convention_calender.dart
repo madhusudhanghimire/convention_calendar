@@ -5,9 +5,10 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../utils/app_colors.dart';
 
-
 class ConventionCalendar extends StatefulWidget {
-  // final Function(DateTime selectedDay, DateTime focusedDay)? onDaySelected;
+  final Function(DateTime? rangeStart, DateTime? rangeEnd)? onRangeSelected;
+  final Function(DateTime? date)? onDateSelected;
+
   final DateTime firstDay;
   final DateTime lastDay;
   final DateTime focusedDay;
@@ -22,9 +23,11 @@ class ConventionCalendar extends StatefulWidget {
   const ConventionCalendar({
     super.key,
     // required this.onDaySelected,
+    this.onRangeSelected,
     required this.firstDay,
     required this.lastDay,
     required this.focusedDay,
+    this.onDateSelected,
     this.headerStyle,
     this.calendarStyle,
     this.calendarBuilders,
@@ -39,7 +42,9 @@ class ConventionCalendar extends StatefulWidget {
     required this.firstDay,
     required this.lastDay,
     required this.focusedDay,
+    this.onRangeSelected,
     this.headerStyle,
+    this.onDateSelected,
     this.calendarStyle,
     this.calendarBuilders,
     this.isRangeEnabled = false,
@@ -78,6 +83,8 @@ class ConventionCalendarState extends State<ConventionCalendar>
     }
     return yearRange;
   }
+
+  getRangedDate({required DateTime rangeStart, required DateTime rangeEnd}) {}
 
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
@@ -401,7 +408,15 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   style: TextButton.styleFrom(
                     foregroundColor: ColorConstants.blue,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    if (widget.isRangeEnabled == true) {
+                      widget.onRangeSelected!(rangeStart,rangeEnd);
+                      Navigator.of(context).pop();
+                    }else{
+                      widget.onDateSelected!(_selectedDay);
+                      Navigator.of(context).pop();
+                    }
+                  },
                   child: const Text('Select'),
                 ),
                 const SizedBox(
