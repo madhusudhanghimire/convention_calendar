@@ -1,4 +1,5 @@
 import 'package:convention_calendar/src/flutter_convention_calender.dart';
+import 'package:convention_calendar/src/models/holiday_model.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -13,7 +14,7 @@ class ConventionCalendarPicker {
     CalendarStyle? calendarStyle,
     HeaderStyle? headerStyle,
     CalendarBuilders? calendarBuilders,
-    List<DateTime>? holidays,
+    List<HolidayModel>? holidays,
   }) async {
     return showDialog<DateTime?>(
       context: context,
@@ -44,7 +45,7 @@ class ConventionCalendarPicker {
     CalendarStyle? calendarStyle,
     HeaderStyle? headerStyle,
     CalendarBuilders? calendarBuilders,
-    List<DateTime>? holidays,
+    List<HolidayModel>? holidays,
   }) async {
     return showDialog<DateTime?>(
       context: context,

@@ -1,4 +1,5 @@
 import 'package:convention_calendar/src/custom_dropdown.dart';
+import 'package:convention_calendar/src/models/holiday_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -18,7 +19,7 @@ class ConventionCalendar extends StatefulWidget {
   final CalendarStyle? calendarStyle;
   final HeaderStyle? headerStyle;
   final CalendarBuilders? calendarBuilders;
-  final List<DateTime>? holidays;
+  final List<HolidayModel>? holidays;
 
   const ConventionCalendar({
     super.key,
@@ -128,10 +129,10 @@ class ConventionCalendarState extends State<ConventionCalendar>
                 lastDay: widget.lastDay,
                 focusedDay: _focusedDay,
                 holidayPredicate: (day) {
-                  for (DateTime i in widget.holidays ?? []) {
-                    if (i.year == day.year &&
-                        i.month == day.month &&
-                        i.day == day.day) {
+                  for (HolidayModel i in widget.holidays ?? []) {
+                    if (i.dateTime?.year == day.year &&
+                        i.dateTime?.month == day.month &&
+                        i.dateTime?.day == day.day) {
                       return true;
                     }
                   }
@@ -290,9 +291,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
                           fontSize: 16,
                           color: (widget.holidays ?? [])
                                   .map((holiday) =>
-                                      holiday.year == day.year &&
-                                      holiday.month == day.month &&
-                                      holiday.day == day.day)
+                                      holiday.dateTime?.year == day.year &&
+                                      holiday.dateTime?.month == day.month &&
+                                      holiday.dateTime?.day == day.day)
                                   .any((match) => match)
                               ? ColorConstants.error
                               : Colors.black,
@@ -310,9 +311,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
                             ? ColorConstants.error
                             : (widget.holidays ?? [])
                                     .map((holiday) =>
-                                        holiday.year == day.year &&
-                                        holiday.month == day.month &&
-                                        holiday.day == day.day)
+                                        holiday.dateTime?.year == day.year &&
+                                        holiday.dateTime?.month == day.month &&
+                                        holiday.dateTime?.day == day.day)
                                     .any((match) => match)
                                 ? ColorConstants.error
                                 : ColorConstants.blue,
@@ -335,9 +336,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
                             ? ColorConstants.error
                             : (widget.holidays ?? [])
                                     .map((holiday) =>
-                                        holiday.year == day.year &&
-                                        holiday.month == day.month &&
-                                        holiday.day == day.day)
+                                        holiday.dateTime?.year == day.year &&
+                                        holiday.dateTime?.month == day.month &&
+                                        holiday.dateTime?.day == day.day)
                                     .any((match) => match)
                                 ? ColorConstants.error
                                 : ColorConstants.blue,
@@ -360,9 +361,9 @@ class ConventionCalendarState extends State<ConventionCalendar>
                             ? ColorConstants.error
                             : (widget.holidays ?? [])
                                     .map((holiday) =>
-                                        holiday.year == day.year &&
-                                        holiday.month == day.month &&
-                                        holiday.day == day.day)
+                                        holiday.dateTime?.year == day.year &&
+                                        holiday.dateTime?.month == day.month &&
+                                        holiday.dateTime?.day == day.day)
                                     .any((match) => match)
                                 ? ColorConstants.error
                                 : ColorConstants.blue,
