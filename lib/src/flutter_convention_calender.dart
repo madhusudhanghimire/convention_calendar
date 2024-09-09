@@ -11,7 +11,6 @@ Future<DateTime?> showConventionCalendarPicker({
   required DateTime lastDay,
   Function(DateTime selectedDay, DateTime focusedDay)? onDaySelected,
   required DateTime focusedDay,
-  DateTime? selectedDay,
   required bool isRangeEnabled,
   Color? rangeHighLightColor,
   CalendarStyle? calendarStyle,
