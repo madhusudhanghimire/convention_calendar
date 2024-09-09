@@ -130,7 +130,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                 holidayPredicate: (day) {
                   print(widget.holidays);
                   print(day.toLocal());
-                  return widget.holidays?.contains(day.toLocal()) ?? false;
+                  return widget.holidays?.contains(day.toUtc()) ?? false;
                 },
                 selectedDayPredicate: (day) {
                   return isSameDay(_selectedDay, day);
