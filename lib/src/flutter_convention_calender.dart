@@ -140,6 +140,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                 selectedDayPredicate: (day) {
                   return isSameDay(_selectedDay, day);
                 },
+              
                 onDaySelected: (selectedDay, focusedDay) {
                   setState(() {
                     _selectedDay = selectedDay;
@@ -233,18 +234,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       color: Colors.black,
                       fontSize: 16,
                       fontWeight: FontWeight.w500),
-                  todayDecoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  selectedDecoration: BoxDecoration(
-                    color: _selectedDay?.weekday == DateTime.saturday ||
-                            _selectedDay?.weekday == DateTime.sunday
-                        ? ColorConstants.error
-                        : ColorConstants.blue,
-                    borderRadius: BorderRadius.circular(8),
-                    shape: BoxShape.rectangle,
-                  ),
+      
                   selectedTextStyle: const TextStyle(color: Colors.white),
                 ),
                 daysOfWeekHeight: 40,
@@ -275,15 +265,19 @@ class ConventionCalendarState extends State<ConventionCalendar>
                         ),
                         alignment: Alignment.center,
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text(
                               day.day.toString(),
                               style: TextStyle(
-                                  fontSize: 16, color: ColorConstants.error),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: ColorConstants.error,
+                              ),
                             ),
                             CircleAvatar(
                               backgroundColor: ColorConstants.error,
-                              radius: 1,
+                              radius: 2,
                             )
                           ],
                         ),
@@ -294,12 +288,13 @@ class ConventionCalendarState extends State<ConventionCalendar>
                     return Container(
                       decoration: BoxDecoration(
                         color: (rangeStart == null || rangeEnd == null)
-                            ? Colors.grey.shade200
+                            ?  Colors.grey.shade200
                             : null,
+                          
                         borderRadius: BorderRadius.circular(8),
                       ),
                       alignment: Alignment.center,
-                      child: Text(
+                      child :   Text(
                         day.day.toString(),
                         style:
                             const TextStyle(fontSize: 16, color: Colors.black),
@@ -323,7 +318,10 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   selectedBuilder: (context, day, focusedDay) {
                     return Container(
                       decoration: BoxDecoration(
-                        color: ColorConstants.blue,
+                        color: _selectedDay?.weekday == DateTime.saturday ||
+                            _selectedDay?.weekday == DateTime.sunday
+                        ? ColorConstants.error
+                        : ColorConstants.blue,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       alignment: Alignment.center,
