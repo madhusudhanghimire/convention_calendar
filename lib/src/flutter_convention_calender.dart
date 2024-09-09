@@ -346,27 +346,46 @@ class ConventionCalendarState extends State<ConventionCalendar>
                     );
                   },
                   selectedBuilder: (context, day, focusedDay) {
-                    return Container(
-                      margin: const EdgeInsets.symmetric(vertical: 4),
-                      decoration: BoxDecoration(
-                        color: _selectedDay?.weekday == DateTime.saturday ||
-                                _selectedDay?.weekday == DateTime.sunday
-                            ? ColorConstants.error
-                            : (widget.holidays ?? [])
-                                    .map((holiday) =>
-                                        holiday.dateTime?.year == day.year &&
-                                        holiday.dateTime?.month == day.month &&
-                                        holiday.dateTime?.day == day.day)
-                                    .any((match) => match)
-                                ? ColorConstants.error
-                                : ColorConstants.blue,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        day.day.toString(),
-                        style:
-                            const TextStyle(fontSize: 16, color: Colors.white),
+                    final holiday = widget.holidays?.firstWhere(
+                      (holiday) =>
+                          holiday.dateTime?.year == day.year &&
+                          holiday.dateTime?.month == day.month &&
+                          holiday.dateTime?.day == day.day,
+                      orElse: () => HolidayModel(),
+                    );
+                    return Tooltip(
+                       decoration: BoxDecoration(
+                              color: ColorConstants.error.withOpacity(0.8),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            textStyle: const TextStyle(color: Colors.white),
+                      message: holiday!.description != null &&
+                              holiday.description!.isNotEmpty
+                          ? holiday.description
+                          : 'No description',
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 4),
+                        decoration: BoxDecoration(
+                          color: _selectedDay?.weekday == DateTime.saturday ||
+                                  _selectedDay?.weekday == DateTime.sunday
+                              ? ColorConstants.error
+                              : (widget.holidays ?? [])
+                                      .map((holiday) =>
+                                          holiday.dateTime?.year == day.year &&
+                                          holiday.dateTime?.month ==
+                                              day.month &&
+                                          holiday.dateTime?.day == day.day)
+                                      .any((match) => match)
+                                  ? ColorConstants.error
+                                  : ColorConstants.blue,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          day.day.toString(),
+                          style: const TextStyle(
+                              fontSize: 16, color: Colors.white),
+                        ),
                       ),
                     );
                   },
