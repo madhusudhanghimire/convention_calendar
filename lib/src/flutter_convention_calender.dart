@@ -262,29 +262,13 @@ class ConventionCalendarState extends State<ConventionCalendar>
                           borderRadius: BorderRadius.circular(8),
                         ),
                         alignment: Alignment.center,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            Expanded(
-                              child: Center(
-                                child: Text(
-                                  day.day.toString(),
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: ColorConstants.error,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            CircleAvatar(
-                              backgroundColor: ColorConstants.error,
-                              radius: 2,
-                            )
-                          ],
+                        child: Text(
+                          day.day.toString(),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: ColorConstants.error,
+                          ),
                         ),
                       ),
                     );
