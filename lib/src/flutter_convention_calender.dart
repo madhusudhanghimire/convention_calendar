@@ -292,7 +292,10 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   rangeStartBuilder: (context, day, focusedDay) {
                     return Container(
                       decoration: BoxDecoration(
-                        color: ColorConstants.blue,
+                        color: day.weekday == DateTime.saturday ||
+                                day.weekday == DateTime.sunday
+                            ? ColorConstants.error
+                            : ColorConstants.blue,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       alignment: Alignment.center,
@@ -303,6 +306,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       ),
                     );
                   },
+                  
                   selectedBuilder: (context, day, focusedDay) {
                     return Container(
                       decoration: BoxDecoration(
@@ -323,7 +327,10 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   rangeEndBuilder: (context, day, focusedDay) {
                     return Container(
                       decoration: BoxDecoration(
-                        color: ColorConstants.blue,
+                        color: day.weekday == DateTime.saturday ||
+                                day.weekday == DateTime.sunday
+                            ? ColorConstants.error
+                            : ColorConstants.blue,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       alignment: Alignment.center,
@@ -339,7 +346,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                             !(day == rangeStart || day == rangeEnd)
                         ? Container(
                             decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
+                              color : Colors.grey.shade200,
                             ),
                             alignment: Alignment.center,
                             child: Text(
