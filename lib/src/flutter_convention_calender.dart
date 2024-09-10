@@ -109,7 +109,6 @@ class ConventionCalendarState extends State<ConventionCalendar>
     setState(() {
       int currentYear = int.tryParse(selectedYear!) ?? DateTime.now().year;
       int newYear = currentYear + delta;
-
       if (newYear >= widget.firstDay.year && newYear <= widget.lastDay.year) {
         selectedYear = newYear.toString();
         _focusedDay = DateTime(newYear, _focusedDay.month, _focusedDay.day);
