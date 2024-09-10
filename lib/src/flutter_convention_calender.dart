@@ -170,10 +170,10 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   setState(() {
                     selectedMonth = DateFormat("MMMM").format(datetime);
                     selectedYear = datetime.year.toString();
-    
+
                     _focusedDay = datetime;
                     _selectedDay = datetime;
-    
+
                     _updateFocusedDay();
                   });
                 },
@@ -269,8 +269,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       color: Colors.black),
                 ),
                 calendarBuilders: CalendarBuilders(
-                  defaultBuilder: (context, day, focusedDay) =>
-                      GestureDetector(
+                  defaultBuilder: (context, day, focusedDay) => GestureDetector(
                     onVerticalDragDown: (details) {
                       _startVerticalDragY = details.globalPosition.dy;
                     },
@@ -278,7 +277,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       if (_startVerticalDragY != null) {
                         double endY = details.primaryVelocity ?? 0;
                         double deltaY = _startVerticalDragY! - endY;
-    
+
                         if (deltaY > 0) {
                           // Swiping up
                           _changeYear(1);
@@ -288,20 +287,21 @@ class ConventionCalendarState extends State<ConventionCalendar>
                         }
                         _startVerticalDragY = null;
                       }
-                    
                     },
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 4),
                       decoration: BoxDecoration(
-                      
                         borderRadius: BorderRadius.circular(8),
                       ),
                       alignment: Alignment.center,
                       child: Text(
                         day.day.toString(),
-                        style: const  TextStyle(
+                        style: TextStyle(
                           fontSize: 16,
-                          color: Colors.black,
+                          color: day.weekday == DateTime.saturday ||
+                                  day.weekday == DateTime.sunday
+                              ? ColorConstants.error
+                              : Colors.black,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -315,7 +315,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                           holiday.dateTime?.day == day.day,
                       orElse: () => HolidayModel(),
                     );
-    
+
                     return holiday != null
                         ? Tooltip(
                             decoration: BoxDecoration(
@@ -382,8 +382,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                             : (widget.holidays ?? [])
                                     .map((holiday) =>
                                         holiday.dateTime?.year == day.year &&
-                                        holiday.dateTime?.month ==
-                                            day.month &&
+                                        holiday.dateTime?.month == day.month &&
                                         holiday.dateTime?.day == day.day)
                                     .any((match) => match)
                                 ? ColorConstants.error
@@ -393,8 +392,8 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       alignment: Alignment.center,
                       child: Text(
                         day.day.toString(),
-                        style: const TextStyle(
-                            fontSize: 16, color: Colors.white),
+                        style:
+                            const TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     );
                   },
@@ -424,8 +423,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                               ? ColorConstants.error
                               : (widget.holidays ?? [])
                                       .map((holiday) =>
-                                          holiday.dateTime?.year ==
-                                              day.year &&
+                                          holiday.dateTime?.year == day.year &&
                                           holiday.dateTime?.month ==
                                               day.month &&
                                           holiday.dateTime?.day == day.day)
@@ -453,8 +451,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                             : (widget.holidays ?? [])
                                     .map((holiday) =>
                                         holiday.dateTime?.year == day.year &&
-                                        holiday.dateTime?.month ==
-                                            day.month &&
+                                        holiday.dateTime?.month == day.month &&
                                         holiday.dateTime?.day == day.day)
                                     .any((match) => match)
                                 ? ColorConstants.error
@@ -464,8 +461,8 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       alignment: Alignment.center,
                       child: Text(
                         day.day.toString(),
-                        style: const TextStyle(
-                            fontSize: 16, color: Colors.white),
+                        style:
+                            const TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     );
                   },
