@@ -269,7 +269,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                       color: Colors.black),
                 ),
                 calendarBuilders: CalendarBuilders(
-                  outsideBuilder: (context, day, focusedDay) =>
+                  defaultBuilder: (context, day, focusedDay) =>
                       GestureDetector(
                     onVerticalDragDown: (details) {
                       _startVerticalDragY = details.globalPosition.dy;
