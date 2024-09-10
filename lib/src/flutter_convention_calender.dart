@@ -302,7 +302,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                                   day.weekday == DateTime.sunday
                               ? ColorConstants.error
                               : Colors.black,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
