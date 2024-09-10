@@ -117,6 +117,8 @@ class ConventionCalendarState extends State<ConventionCalendar>
     });
   }
 
+  double? _startVerticalDragY;
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -126,13 +128,22 @@ class ConventionCalendarState extends State<ConventionCalendar>
       backgroundColor: Colors.white,
       insetPadding: const EdgeInsets.symmetric(horizontal: 12),
       child: GestureDetector(
-        onVerticalDragUpdate: (details) {
-          if (details.primaryDelta != null) {
-            if (details.primaryDelta! > 0) {
-              _changeYear(-1);
-            } else if (details.primaryDelta! < 0) {
+         onVerticalDragDown: (details) {
+          _startVerticalDragY = details.globalPosition.dy;
+        },
+        onVerticalDragEnd: (details) {
+          if (_startVerticalDragY != null) {
+            double endY = details.primaryVelocity ?? 0;
+            double deltaY = _startVerticalDragY! - endY;
+
+            if (deltaY > 0) {
+              // Swiping up
               _changeYear(1);
+            } else if (deltaY < 0) {
+              // Swiping down
+              _changeYear(-1);
             }
+            _startVerticalDragY = null;
           }
         },
         child: Container(
