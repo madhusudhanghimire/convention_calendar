@@ -288,7 +288,24 @@ class ConventionCalendarState extends State<ConventionCalendar>
                         }
                         _startVerticalDragY = null;
                       }
+                    
                     },
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 4),
+                      decoration: BoxDecoration(
+                      
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        day.day.toString(),
+                        style: const  TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
                   ),
                   holidayBuilder: (context, day, focusedDay) {
                     final holiday = widget.holidays?.firstWhere(
