@@ -121,14 +121,8 @@ class ConventionCalendarState extends State<ConventionCalendar>
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      insetAnimationCurve: Curves.bounceIn,
-      insetAnimationDuration: const Duration(milliseconds: 300),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      backgroundColor: Colors.white,
-      insetPadding: const EdgeInsets.symmetric(horizontal: 12),
-      child: GestureDetector(
-         onVerticalDragDown: (details) {
+    return GestureDetector(
+       onVerticalDragDown: (details) {
           _startVerticalDragY = details.globalPosition.dy;
         },
         onVerticalDragEnd: (details) {
@@ -146,6 +140,12 @@ class ConventionCalendarState extends State<ConventionCalendar>
             _startVerticalDragY = null;
           }
         },
+      child: Dialog(
+        insetAnimationCurve: Curves.bounceIn,
+        insetAnimationDuration: const Duration(milliseconds: 300),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        backgroundColor: Colors.white,
+        insetPadding: const EdgeInsets.symmetric(horizontal: 12),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
@@ -189,10 +189,10 @@ class ConventionCalendarState extends State<ConventionCalendar>
                     setState(() {
                       selectedMonth = DateFormat("MMMM").format(datetime);
                       selectedYear = datetime.year.toString();
-
+        
                       _focusedDay = datetime;
                       _selectedDay = datetime;
-
+        
                       _updateFocusedDay();
                     });
                   },
@@ -296,7 +296,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
                             holiday.dateTime?.day == day.day,
                         orElse: () => HolidayModel(),
                       );
-
+        
                       return holiday != null
                           ? Tooltip(
                               decoration: BoxDecoration(
