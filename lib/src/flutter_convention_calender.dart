@@ -145,7 +145,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
         insetAnimationDuration: const Duration(milliseconds: 300),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         backgroundColor: Colors.white,
-        insetPadding: const EdgeInsets.symmetric(horizontal: 12),
+        insetPadding: const EdgeInsets.symmetric(horizontal: 16),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
