@@ -103,6 +103,7 @@ class ConventionCalendarState extends State<ConventionCalendar>
     selectedMonth = DateFormat('MMMM').format(now);
     selectedYear = now.year.toString();
     years = _generateYears(widget.firstDay, widget.lastDay);
+    _focusedDay = widget.focusedDay;
   }
 
   void _changeYear(int delta) {
