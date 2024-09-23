@@ -106,7 +106,6 @@ class ConventionCalendarState extends State<ConventionCalendar>
     _focusedDay = widget.focusedDay;
     selectedYear = _focusedDay.year.toString();
     selectedMonth = DateFormat('MMMM').format(_focusedDay);
-
   }
 
   void _changeYear(int delta) {
@@ -156,7 +155,11 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   return false;
                 },
                 selectedDayPredicate: (day) {
-                  return isSameDay(_selectedDay ?? _focusedDay, day);
+                  if (!widget.isRangeEnabled) {
+                    return isSameDay(_selectedDay ?? _focusedDay, day);
+                  } else {
+                    return false;
+                  }
                 },
                 onDaySelected: (selectedDay, focusedDay) {
                   setState(() {
