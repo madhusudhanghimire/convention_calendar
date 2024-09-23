@@ -140,7 +140,6 @@ class ConventionCalendarState extends State<ConventionCalendar>
                   borderRadius: BorderRadius.circular(8)),
               color: Colors.white,
               child: TableCalendar(
-                currentDay: _focusedDay,
                 startingDayOfWeek: StartingDayOfWeek.monday,
                 pageAnimationEnabled: true,
                 firstDay: widget.firstDay,
